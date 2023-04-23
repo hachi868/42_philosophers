@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/23 23:52:23 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/24 00:21:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,8 @@ typedef struct s_philo
 }	t_philo;
 
 int	start_simulation(t_philo *philosophers);
+
+// utils/atoi.c
+int	ft_atoi_unsigned(char *str_num);
 
 #endif //PHILOSOPHERS_H

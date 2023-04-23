@@ -18,7 +18,7 @@ SRCS =	main.c\
 		utils/check_error.c\
 		utils/memory.c\
 		utils/print.c\
-		utils/atoi.c
+		utils/ft_atoi_unsigned.c
 
 OBJS := $(SRCS:.c=.o)
 
