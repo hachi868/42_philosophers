@@ -13,7 +13,12 @@ PROG := philo
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-SRCS =	main.c
+SRCS =	main.c\
+		init_simulation.c\
+		utils/check_error.c\
+		utils/memory.c\
+		utils/print.c\
+		utils/atoi.c
 
 OBJS := $(SRCS:.c=.o)
 

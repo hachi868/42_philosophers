@@ -6,21 +6,15 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/23 20:01:01 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/23 23:39:27 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
 #include "./include/philosophers.h"
 
-static int	start_simuration(t_philosophers *philosophers)
+static t_philo	*init_philo(int argc, char **argv)
 {
-	return (0);
-}
-
-static t_philosophers	*init_philosophers(int argc, char **argv)
-{
-	t_philosophers	*philosophers;
+	t_philo	*philosophers;
 
 	philosophers->number_of_philosophers = atoi(argv[1]);
 	philosophers->time_to_die = atoi(argv[2]);
@@ -38,14 +32,14 @@ static t_philosophers	*init_philosophers(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_philosophers	*philosophers;
+	t_philo	*philosophers;
 
 	if (argc == 5 || argc == 6)
 	{
-		philosophers = init_philosophers(argc, argv);
+		philosophers = init_philo(argc, argv);
 		if (philosophers == NULL)//todo:free
 			return ();
-		start_simuration(philosophers);
+		start_simulation(philosophers);
 	}
 	return (0);
 }

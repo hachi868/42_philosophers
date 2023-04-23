@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/23 19:56:20 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/23 23:52:23 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,17 @@
 # include <limits.h>
 # include <stdio.h>
 # include <string.h>
+# include <pthread.h>
 
-typedef struct s_philosophers
+typedef struct s_philo
 {
 	int	number_of_philosophers;
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;//todo: 初期値マイナス？
-}	t_philosophers;
+	int	number_of_times_each_philosopher_must_eat;
+}	t_philo;
+
+int	start_simulation(t_philo *philosophers);
 
 #endif //PHILOSOPHERS_H
