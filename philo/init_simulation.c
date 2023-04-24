@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/25 02:02:52 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/25 02:19:18 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	start_simulation(t_philo *philosophers)
 			//todo:free
 			return (1);
 		}
+		philo[i] = NULL;//pthread_joinはfreeされる？NULL埋めしておく
 		i++;
 	}
 	printf("全スレッド終わり");
