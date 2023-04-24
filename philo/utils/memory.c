@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/23 23:47:24 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/24 23:24:01 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	free_all(t_philo *philo)
 {
+	(void)philo;
 //	clear_philo(philo);
 //	free(philo);
 //	philo = NULL;

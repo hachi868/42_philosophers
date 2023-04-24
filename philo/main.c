@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/23 23:39:27 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/24 23:22:11 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static t_philo	*init_philo(int argc, char **argv)
 {
 	t_philo	*philosophers;
 
+	philosophers = (t_philo *)malloc(sizeof(t_philo));
 	philosophers->number_of_philosophers = atoi(argv[1]);
 	philosophers->time_to_die = atoi(argv[2]);
 	philosophers->time_to_eat = atoi(argv[3]);
@@ -37,8 +38,8 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		philosophers = init_philo(argc, argv);
-		if (philosophers == NULL)//todo:free
-			return ();
+		if (philosophers == NULL)
+			return (1);
 		start_simulation(philosophers);
 	}
 	return (0);
