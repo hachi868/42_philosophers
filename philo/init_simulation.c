@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/25 02:19:18 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/26 02:29:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	*thread_func(void *arg)
 	return ((void *)n);
 }
 
-int	start_simulation(t_philo *philosophers)
+int	start_simulation(t_simulation *philosophers)
 {
 	size_t		num_threads;
 	pthread_t	*philo;

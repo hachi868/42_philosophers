@@ -6,17 +6,17 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/24 23:22:11 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/26 02:29:56 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philosophers.h"
 
-static t_philo	*init_philo(int argc, char **argv)
+static t_simulation	*init_philo(int argc, char **argv)
 {
-	t_philo	*philosophers;
+	t_simulation	*philosophers;
 
-	philosophers = (t_philo *)malloc(sizeof(t_philo));
+	philosophers = (t_simulation *)malloc(sizeof(t_simulation));
 	philosophers->number_of_philosophers = atoi(argv[1]);
 	philosophers->time_to_die = atoi(argv[2]);
 	philosophers->time_to_eat = atoi(argv[3]);
@@ -33,7 +33,7 @@ static t_philo	*init_philo(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_philo	*philosophers;
+	t_simulation	*philosophers;
 
 	if (argc == 5 || argc == 6)
 	{
