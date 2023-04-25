@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/25 03:04:09 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/26 03:32:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ typedef struct s_philo_info
 }	t_philo_info;
 
 int			start_simulation(t_simulation *philosophers);
+
+// state_change/take_a_folk.c
+void		do_take_a_fork(t_philo_info *philo);
+
+// state_change/eating.c
+void		do_eat(t_philo_info *philo);
+
+// state_change/sleeping.c
+void		do_sleep(t_philo_info *philo);
+
+// state_change/thinking.c
+void		do_think(t_philo_info *philo);
+
+// state_change/died.c
+void		is_died(t_philo_info *philo);
 
 // utils/atoi.c
 int			ft_atoi_unsigned(char *str_num);
