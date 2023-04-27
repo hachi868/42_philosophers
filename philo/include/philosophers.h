@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/26 03:32:15 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/27 21:07:33 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,25 @@
 
 typedef struct s_simulation
 {
-	int	number_of_philosophers;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	number_of_times_each_philosopher_must_eat;
+	t_philo_info	*philo_head;
+	int				number_of_philosophers;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_times_each_philosopher_must_eat;
 }	t_simulation;
 
-typedef struct s_philo_info
+typedef struct s_philo_info	t_philo_info;
+struct s_philo_info
 {
 	int				index;
 	pthread_t		*thread;
 	pthread_mutex_t	spork;//odd
 	pthread_mutex_t	folk;//even
-	int				time_last_eaten;
+	long long		time_last_eaten;
 	int				count_eaten;
-}	t_philo_info;
+	t_philo_info	*next;
+};
 
 int			start_simulation(t_simulation *philosophers);
 
