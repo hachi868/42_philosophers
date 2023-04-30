@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/27 21:07:33 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/30 15:46:33 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct s_simulation
 {
 	t_philo_info	*philo_head;
+	pthread_mutex_t	*folk_head;
 	int				number_of_philosophers;
 	int				time_to_die;
 	int				time_to_eat;
@@ -36,7 +37,7 @@ typedef struct s_simulation
 typedef struct s_philo_info	t_philo_info;
 struct s_philo_info
 {
-	int				index;
+	size_t			index;
 	pthread_t		*thread;
 	pthread_mutex_t	spork;//odd
 	pthread_mutex_t	folk;//even

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/26 02:29:29 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/04/30 18:12:01 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,55 @@ void	*thread_func(void *arg)
 	return ((void *)n);
 }
 
+void	init_philo_info(\
+	t_philo_info *philo_info, size_t i, pthread_mutex_t	*list_folk)
+{
+	philo_info->index = i + 1;
+	philo_info->thread = \
+		pthread_create(*philo_info, NULL, thread_func, (void *)i);
+	if (philo_info->thread != 0)
+	{
+		printf("Error!スレッド作れなかった");
+		//todo:free
+		return (1);
+	}
+	if (i % 2)//todo:ラストは0に。
+	{
+		philo_info->spork = list_folk[i];
+		philo_info->folk = list_folk[i];
+	}
+	else
+	{
+		philo_info->spork = list_folk[i];
+		philo_info->folk = list_folk[i];
+	}
+	philo_info->time_last_eaten = 0;//todo:0で良いか？
+	philo_info->count_eaten = 0;
+	philo_info->next = philo_info + 1;//todo:不要では？
+}
+
 int	start_simulation(t_simulation *philosophers)
 {
-	size_t		num_threads;
-	pthread_t	*philo;
-	size_t		i;
+	size_t			num_threads;
+	t_philo_info	*philo;
+	pthread_mutex_t	*list_folk;
+	size_t			i;
 
 	num_threads = philosophers->number_of_philosophers;
 	i = 0;
-	philo = (pthread_t *)malloc(sizeof(pthread_t) * num_threads);
+	philo = (t_philo_info *)malloc(sizeof(t_philo_info **) * num_threads);
+	list_folk = (pthread_mutex_t *)malloc(\
+	sizeof(pthread_mutex_t **) * num_threads);
 	while (i < num_threads)
 	{
-		if (pthread_create(&philo[i], NULL, thread_func, (void *)i) != 0)
-		{
-			printf("Error!スレッド作れなかった");
-			//todo:free
-			return (1);
-		}
+		if (pthread_mutex_init(list_folk[i], NULL) != 0)
+			exit(1);//todo:free
+		i++;
+	}
+	i = 0;
+	while (i < num_threads)
+	{
+		init_philo_info(philo[i], i, list_folk);//todo: 失敗した場合？
 		i++;
 	}
 	i = 0;
@@ -74,3 +106,12 @@ int	start_simulation(t_simulation *philosophers)
 	printf("全スレッド終わり");
 	return (0);
 }
+//右利きと左利きが交互に座っている
+//フォークを2本take
+//食べる
+//フォークを置く
+//寝る
+//思考
+//まず先割れスプーンをとる。
+// フォークが空いてたら取る。
+//取れなかったら一旦置く
