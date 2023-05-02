@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/30 15:46:33 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/03 02:32:31 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 
+typedef struct s_philo_info	t_philo_info;
+
 typedef struct s_simulation
 {
 	t_philo_info	*philo_head;
@@ -34,7 +36,6 @@ typedef struct s_simulation
 	int				number_of_times_each_philosopher_must_eat;
 }	t_simulation;
 
-typedef struct s_philo_info	t_philo_info;
 struct s_philo_info
 {
 	size_t			index;
@@ -43,7 +44,6 @@ struct s_philo_info
 	pthread_mutex_t	folk;//even
 	long long		time_last_eaten;
 	int				count_eaten;
-	t_philo_info	*next;
 };
 
 int			start_simulation(t_simulation *philosophers);

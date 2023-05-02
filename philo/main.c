@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/26 02:29:56 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/03 01:45:26 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_simulation	*init_philo(int argc, char **argv)
 	philosophers->time_to_die = atoi(argv[2]);
 	philosophers->time_to_eat = atoi(argv[3]);
 	philosophers->time_to_sleep = atoi(argv[4]);
-	if (argc == 5)
+	if (argc == 6)
 		philosophers->number_of_times_each_philosopher_must_eat = atoi(argv[5]);
 	else
 		philosophers->number_of_times_each_philosopher_must_eat = -1;

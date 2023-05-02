@@ -12,7 +12,7 @@
 PROG := philo
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g
 SRCS =	main.c\
 		init_simulation.c\
 		utils/check_error.c\
