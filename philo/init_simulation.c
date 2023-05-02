@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/03 02:45:35 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/03 03:06:54 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,15 @@ void	init_philo_info(\
 
 int	start_simulation(t_simulation *philosophers)
 {
-	size_t			num_threads;
-	t_philo_info	*philo;
-	pthread_mutex_t	*list_folk;
-	size_t			i;
+	size_t	num_threads;
+	size_t	i;
 
 	num_threads = philosophers->number_of_philosophers;
 	i = 0;
-	philo = (t_philo_info *)malloc(sizeof(t_philo_info) * num_threads);
-	list_folk = (pthread_mutex_t *)malloc(\
-	sizeof(pthread_mutex_t) * num_threads);
 	while (i < num_threads)
 	{
 		printf("start_simulation 1 - %zu\n", i);
-		if (pthread_mutex_init(&list_folk[i], NULL) != 0)
+		if (pthread_mutex_init(philosophers->folk_list[i], NULL) != 0)
 			exit(1);//todo:free
 		i++;
 	}
@@ -88,19 +83,20 @@ int	start_simulation(t_simulation *philosophers)
 	while (i < num_threads)
 	{
 		printf("start_simulation 2 - %zu\n", i);
-		init_philo_info(&philo[i], i, list_folk);//todo: 失敗した場合？
+		init_philo_info(\
+			philosophers->philo_list[i], i, *philosophers->folk_list);
 		i++;
 	}
 	i = 0;
 	while (i < num_threads)
 	{
-		if (pthread_join(*philo[i].thread, NULL) != 0)
+		if (pthread_join(*philosophers->philo_list[i]->thread, NULL) != 0)
 		{
 			printf("Error!スレッド待ち失敗");
 			//todo:free
 			return (1);
 		}
-		philo[i].thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
+		philosophers->philo_list[i]->thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
 		i++;
 	}
 	printf("全スレッド終わり");
