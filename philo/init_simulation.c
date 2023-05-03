@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/03 03:06:54 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/03 18:53:05 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,13 @@ void	*thread_func(void *arg)
 	return ((void *)n);
 }
 
-void	init_philo_info(\
-	t_philo_info *philo_info, size_t i, pthread_mutex_t	*list_folk)
+void	init_philo_info(t_simulation *philosophers, int i)
 {
+	t_philo_info	*philo_info;
+	int				num_philo;
+
+	num_philo = philosophers->number_of_philosophers;
+	philo_info = philosophers->philo_list[i];
 	philo_info->index = i + 1;
 	philo_info->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\
@@ -51,15 +55,21 @@ void	init_philo_info(\
 		//todo:free
 		return ;//error
 	}
-	if (i % 2)//todo:ラストは0に。
+	if (i % 2 == 0)
 	{
-		philo_info->spork = list_folk[i];
-		philo_info->folk = list_folk[i];
+		if (i == num_philo - 1)
+			philo_info->spork = philosophers->folk_list[0];
+		else
+			philo_info->spork = philosophers->folk_list[i + 1];
+		philo_info->folk = philosophers->folk_list[i];
 	}
 	else
 	{
-		philo_info->spork = list_folk[i];
-		philo_info->folk = list_folk[i];
+		if (i == num_philo - 1)
+			philo_info->folk = philosophers->folk_list[0];
+		else
+			philo_info->folk = philosophers->folk_list[i + 1];
+		philo_info->spork = philosophers->folk_list[i];
 	}
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
@@ -83,8 +93,7 @@ int	start_simulation(t_simulation *philosophers)
 	while (i < num_threads)
 	{
 		printf("start_simulation 2 - %zu\n", i);
-		init_philo_info(\
-			philosophers->philo_list[i], i, *philosophers->folk_list);
+		init_philo_info(philosophers, i);
 		i++;
 	}
 	i = 0;
