@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/26 03:23:33 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 15:51:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	free_and_null(void **ptr)
 	return (0);
 }
 
-//void	clear_philo(t_simulation *philo)
+//void	clear_philo(t_simulation *ctx_simulation)
 //{
 //
 //}

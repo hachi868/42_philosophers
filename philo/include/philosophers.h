@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/03 14:21:17 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 15:56:44 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ struct s_philo_info
 	int				count_eaten;
 };
 
-int			start_simulation(t_simulation *philosophers);
+int			start_simulation(t_simulation *ctx_simulation);
 
 // state_change/take_a_folk.c
 void		do_take_a_fork(t_philo_info *philo);
 
 // state_change/eating.c
-void		do_eat(t_philo_info *philo);
+void		do_eat(t_simulation *ctx_simulation, t_philo_info *philo);
 
 // state_change/sleeping.c
 void		do_sleep(t_philo_info *philo);

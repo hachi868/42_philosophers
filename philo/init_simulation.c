@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/03 19:24:22 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 15:56:10 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,40 +28,40 @@
 // voidポインタをreturnし、voidポインタの引数を1つ取る関数でないといけない。
 void	*thread_func(void *arg)
 {
-	t_philo_info	*philo_info;
+	t_philo_info	*philo;
 
-	philo_info = (t_philo_info *)arg;
-	pthread_mutex_lock(philo_info->spork);
-	pthread_mutex_lock(philo_info->folk);
-	printf("%zu: eating\n", philo_info->index);
-	pthread_mutex_unlock(philo_info->folk);
-	pthread_mutex_unlock(philo_info->spork);
-	return ((void *)philo_info);
+	philo = (t_philo_info *)arg;
+	pthread_mutex_lock(philo->spork);
+	pthread_mutex_lock(philo->folk);
+	printf("%zu: eating\n", philo->index);
+	pthread_mutex_unlock(philo->folk);
+	pthread_mutex_unlock(philo->spork);
+	return ((void *)philo);
 }
 
-void	init_philo_info(t_simulation *philosophers, int i)
+void	init_philo_info(t_simulation *ctx_simulation, int i)
 {
 	t_philo_info	*philo_info;
 	int				num_philo;
 
-	num_philo = philosophers->number_of_philosophers;
-	philo_info = philosophers->philo_list[i];
+	num_philo = ctx_simulation->number_of_philosophers;
+	philo_info = ctx_simulation->philo_list[i];
 	philo_info->index = i + 1;
 	if (i % 2 == 0)
 	{
 		if (i == num_philo - 1)
-			philo_info->spork = philosophers->folk_list[0];
+			philo_info->spork = ctx_simulation->folk_list[0];
 		else
-			philo_info->spork = philosophers->folk_list[i + 1];
-		philo_info->folk = philosophers->folk_list[i];
+			philo_info->spork = ctx_simulation->folk_list[i + 1];
+		philo_info->folk = ctx_simulation->folk_list[i];
 	}
 	else
 	{
 		if (i == num_philo - 1)
-			philo_info->folk = philosophers->folk_list[0];
+			philo_info->folk = ctx_simulation->folk_list[0];
 		else
-			philo_info->folk = philosophers->folk_list[i + 1];
-		philo_info->spork = philosophers->folk_list[i];
+			philo_info->folk = ctx_simulation->folk_list[i + 1];
+		philo_info->spork = ctx_simulation->folk_list[i];
 	}
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
@@ -75,35 +75,35 @@ void	init_philo_info(t_simulation *philosophers, int i)
 	}
 }
 
-int	start_simulation(t_simulation *philosophers)
+int	start_simulation(t_simulation *ctx_simulation)
 {
 	int	num_threads;
 	int	i;
 
-	num_threads = philosophers->number_of_philosophers;
+	num_threads = ctx_simulation->number_of_philosophers;
 	i = 0;
 	while (i < num_threads)
 	{
-		if (pthread_mutex_init(philosophers->folk_list[i], NULL) != 0)
+		if (pthread_mutex_init(ctx_simulation->folk_list[i], NULL) != 0)
 			exit(1);//todo:free
 		i++;
 	}
 	i = 0;
 	while (i < num_threads)
 	{
-		init_philo_info(philosophers, i);
+		init_philo_info(ctx_simulation, i);
 		i++;
 	}
 	i = 0;
 	while (i < num_threads)
 	{
-		if (pthread_join(*philosophers->philo_list[i]->thread, NULL) != 0)
+		if (pthread_join(*ctx_simulation->philo_list[i]->thread, NULL) != 0)
 		{
 			printf("Error!スレッド待ち失敗");
 			//todo:free
 			return (1);
 		}
-		philosophers->philo_list[i]->thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
+		ctx_simulation->philo_list[i]->thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
 		i++;
 	}
 	printf("全スレッド終わり");
@@ -118,3 +118,6 @@ int	start_simulation(t_simulation *philosophers)
 //まず先割れスプーンをとる。
 // フォークが空いてたら取る。
 //取れなかったら一旦置く
+
+//食事を開始したら、time_last_eatenに記録。time_to_die秒後に様子を見る。time_last_eatenとの差分で死んでるか判定。
+//食事が終わったら食事回数++
