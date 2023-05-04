@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 15:56:44 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 16:00:33 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_simulation
 
 struct s_philo_info
 {
-	size_t			index;
+	int				index;
 	pthread_t		*thread;
 	pthread_mutex_t	*spork;
 	pthread_mutex_t	*folk;
