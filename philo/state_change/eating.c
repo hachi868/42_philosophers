@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 00:23:12 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 02:40:49 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 {
 	philo->time_last_eaten = get_timestamp();
-	init_monitoring(ctx_simulation, philo);
+	check_living(philo);
+	//init_monitoring(ctx_simulation, philo);//todo: reinit
 	printf("%lld %d is eating\n", philo->time_last_eaten, philo->index);
 	usleep(ctx_simulation->time_to_eat * 1000);
 	if (ctx_simulation->number_of_times_each_philosopher_must_eat == -1)
