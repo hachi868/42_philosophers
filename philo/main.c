@@ -6,13 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 17:00:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 18:16:39 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philosophers.h"
 
-static t_simulation	*init_philo(int argc, char **argv)
+static t_simulation	*init_simulation(int argc, char **argv)//todo:Rename
 {
 	t_simulation	*ctx_simulation;
 	int			i;
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		ctx_simulation = init_philo(argc, argv);
+		ctx_simulation = init_simulation(argc, argv);
 		if (ctx_simulation == NULL)
 			return (1);
 		start_simulation(ctx_simulation);
