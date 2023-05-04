@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 18:16:39 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 18:17:31 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static t_simulation	*init_simulation(int argc, char **argv)//todo:Rename
 {
 	t_simulation	*ctx_simulation;
-	int			i;
+	int				i;
 
 	i = 0;
 	ctx_simulation = (t_simulation *)malloc(sizeof(t_simulation));
