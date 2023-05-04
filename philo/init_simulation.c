@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 17:02:17 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 18:10:30 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,22 @@ static void	*thread_func(void *arg)
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
-	pthread_mutex_lock(philo->spork);
-	pthread_mutex_lock(philo->folk);
-	do_eat(philo->ctx_simulation, philo);
-	pthread_mutex_unlock(philo->folk);
-	pthread_mutex_unlock(philo->spork);
+	//シミュレーションの終了は全員規定回食べたor死なのでこのループでは制御していない
+	while (1)
+	{
+		//1.食べる
+		pthread_mutex_lock(philo->spork);
+		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);
+		pthread_mutex_lock(philo->folk);
+		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);
+		do_eat(philo->ctx_simulation, philo);
+		pthread_mutex_unlock(philo->folk);
+		pthread_mutex_unlock(philo->spork);
+		//2.寝る
+		do_sleep(philo->ctx_simulation, philo);
+		//3.考える
+		do_think(philo);
+	}
 	return ((void *)philo);
 }
 

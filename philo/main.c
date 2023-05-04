@@ -39,6 +39,7 @@ static t_simulation	*init_philo(int argc, char **argv)
 		ctx_simulation->number_of_times_each_philosopher_must_eat = atoi(argv[5]);
 	else
 		ctx_simulation->number_of_times_each_philosopher_must_eat = -1;
+	ctx_simulation->number_fill_eat = 0;
 	//todo: errorcheck return 1
 //	if (arg_error)
 //		return (NULL);
