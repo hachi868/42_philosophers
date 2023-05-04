@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 15:56:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 17:02:17 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@
 
 // pthread_createの第3引数として渡す。
 // voidポインタをreturnし、voidポインタの引数を1つ取る関数でないといけない。
-void	*thread_func(void *arg)
+static void	*thread_func(void *arg)
 {
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
 	pthread_mutex_lock(philo->spork);
 	pthread_mutex_lock(philo->folk);
-	printf("%zu: eating\n", philo->index);
+	do_eat(philo->ctx_simulation, philo);
 	pthread_mutex_unlock(philo->folk);
 	pthread_mutex_unlock(philo->spork);
 	return ((void *)philo);
@@ -44,8 +44,10 @@ void	init_philo_info(t_simulation *ctx_simulation, int i)
 	t_philo_info	*philo_info;
 	int				num_philo;
 
+
 	num_philo = ctx_simulation->number_of_philosophers;
 	philo_info = ctx_simulation->philo_list[i];
+	philo_info->ctx_simulation = ctx_simulation;
 	philo_info->index = i + 1;
 	if (i % 2 == 0)
 	{

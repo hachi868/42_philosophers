@@ -15,6 +15,11 @@ CC := cc
 CFLAGS := -Wall -Wextra -Werror -g
 SRCS =	main.c\
 		init_simulation.c\
+		state_change/take_a_folk.c\
+		state_change/eating.c\
+		state_change/sleeping.c\
+		state_change/thinking.c\
+		state_change/died.c\
 		utils/check_error.c\
 		utils/memory.c\
 		utils/print.c\
