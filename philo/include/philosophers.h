@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 18:07:46 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/04 18:40:59 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ struct s_philo_info
 	pthread_t		*thread;
 	pthread_mutex_t	*spork;
 	pthread_mutex_t	*folk;
+	pthread_t		*monitoring;
 	long long		time_last_eaten;
 	int				count_eaten;
 };
@@ -59,6 +60,7 @@ void		do_sleep(t_simulation *ctx_simulation, t_philo_info *philo);
 void		do_think(t_philo_info *philo);
 
 // state_change/died.c
+void		init_monitoring(t_simulation *ctx_simulation, t_philo_info *philo);
 void		is_died(t_philo_info *philo);
 
 // utils/atoi.c
