@@ -6,23 +6,11 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 18:10:30 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 00:25:20 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philosophers.h"
-
-//void	repeat_print(int n, const char *func_name)
-//{
-//	int	i;
-//
-//	i = 0;
-//	while (i < n)
-//	{
-//		printf("%d: I'm philo %d : on %s\n", i, n, func_name);
-//		i++;
-//	}
-//}
 
 // pthread_createの第3引数として渡す。
 // voidポインタをreturnし、voidポインタの引数を1つ取る関数でないといけない。
