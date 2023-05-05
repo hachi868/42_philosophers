@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 15:47:00 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 18:26:47 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_philo_info(t_simulation *ctx_simulation, int i)
 			philo_info->folk = ctx_simulation->folk_list[i + 1];
 		philo_info->spork = ctx_simulation->folk_list[i];
 	}
-	philo_info->time_last_eaten = 0;
+	philo_info->time_last_eaten = get_timestamp();
 	philo_info->count_eaten = 0;
 	philo_info->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\

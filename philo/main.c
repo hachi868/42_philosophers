@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 18:02:50 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 18:07:23 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ static t_simulation	*init_simulation(int argc, char **argv)//todo:Rename
 	ctx_simulation->mutex_fill_eat = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (pthread_mutex_init(ctx_simulation->mutex_fill_eat, NULL) != 0)
+		exit(1);//todo:free
+	ctx_simulation->is_end = false;
+	ctx_simulation->mutex_is_end = \
+		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+	if (pthread_mutex_init(ctx_simulation->mutex_is_end, NULL) != 0)
 		exit(1);//todo:free
 	//todo: errorcheck return 1
 //	if (arg_error)
