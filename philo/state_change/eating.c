@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 18:39:46 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 19:00:57 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 			ctx_simulation->number_of_philosophers)
 		{
 			printf("全員たべきった。end!!!\n");
+			pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
+			philo->ctx_simulation->is_end = true;
+			pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
 			exit(0);//todo:諸々free(ifを抜けないならunlockも？)
 		}
 		pthread_mutex_unlock(ctx_simulation->mutex_fill_eat);
