@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 18:25:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 02:50:42 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ struct s_philo_info
 	pthread_t		*thread;
 	pthread_mutex_t	*spork;
 	pthread_mutex_t	*folk;
-	pthread_t		*monitoring;
 	long long		time_last_eaten;
 	int				count_eaten;
 };
@@ -73,5 +72,8 @@ int			ft_atoi_unsigned(char *str_num);
 
 // utils/print.c
 long long	get_timestamp(void);
+
+// utils/check_end.c
+void		check_end(t_simulation *ctx_simulation);
 
 #endif //PHILOSOPHERS_H

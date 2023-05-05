@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   thinking.c                                         :+:      :+:    :+:   */
+/*   check_end.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/25 03:05:27 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 03:14:45 by hachi-gbg        ###   ########.fr       */
+/*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
+/*   Updated: 2023/05/06 02:50:11 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	do_think(t_philo_info *philo)
+void	check_end(t_simulation *ctx_simulation)
 {
-	check_end(philo->ctx_simulation);
-	printf("%lld %d is thinking\n", get_timestamp(), philo->index);
-	usleep(100000);//todo:停止時間検討
+	pthread_mutex_lock(ctx_simulation->mutex_is_end);
+	if (ctx_simulation->is_end == true)
+	{
+		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		return ;
+	}
+	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 }

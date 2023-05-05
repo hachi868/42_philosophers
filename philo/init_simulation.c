@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 18:26:47 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 03:17:07 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	*thread_func(void *arg)
 	{
 		//1.食べる
 		pthread_mutex_lock(philo->spork);
-		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);
+		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);//todo: is_endで止める
 		pthread_mutex_lock(philo->folk);
 		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);
 		do_eat(philo->ctx_simulation, philo);
@@ -34,7 +34,7 @@ static void	*thread_func(void *arg)
 		do_sleep(philo->ctx_simulation, philo);
 		//3.考える
 		do_think(philo);
-		break ;//todo:それぞれの動作で終了条件trueを観測できたら
+		//break ;//todo:それぞれの動作で終了条件trueを観測できたら
 	}
 	return ((void *)philo);
 }
@@ -43,7 +43,6 @@ void	init_philo_info(t_simulation *ctx_simulation, int i)
 {
 	t_philo_info	*philo_info;
 	int				num_philo;
-
 
 	num_philo = ctx_simulation->number_of_philosophers;
 	philo_info = ctx_simulation->philo_list[i];
@@ -71,7 +70,7 @@ void	init_philo_info(t_simulation *ctx_simulation, int i)
 	if (pthread_create(\
 		philo_info->thread, NULL, thread_func, (void *)philo_info) != 0)
 	{
-		printf("Error!スレッド作れなかった");
+		printf("Error!スレッド作れなかった init_philo_info\n");
 		//todo:free
 		return ;//error
 	}

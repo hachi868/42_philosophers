@@ -19,10 +19,11 @@ SRCS =	main.c\
 		state_change/sleeping.c\
 		state_change/thinking.c\
 		state_change/died.c\
-		utils/check_error.c\
 		utils/memory.c\
 		utils/print.c\
-		utils/ft_atoi_unsigned.c
+		utils/ft_atoi_unsigned.c\
+		utils/check_error.c\
+		utils/check_end.c
 
 OBJS := $(SRCS:.c=.o)
 
