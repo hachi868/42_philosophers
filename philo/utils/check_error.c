@@ -6,13 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:39:11 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 16:17:18 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 17:46:42 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	is_invalid_args(int argc, char **argv)
+bool	is_invalid_args(int argc, char **argv)
 {
 	int	i;
 
@@ -20,8 +20,8 @@ int	is_invalid_args(int argc, char **argv)
 	while (i < argc)
 	{
 		if (argv[i][0] == '\0')
-			return (1);
+			return (true);
 		i++;
 	}
-	return (0);
+	return (false);
 }
