@@ -25,7 +25,7 @@ void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 	if (philo->count_eaten == \
 		ctx_simulation->number_of_times_each_philosopher_must_eat)
 	{
-		pthread_mutex_lock(ctx_simulation->->mutex_fill_eat);
+		pthread_mutex_lock(ctx_simulation->mutex_fill_eat);
 		//printf("%d: たべきった!\n", philo->index);
 		ctx_simulation->number_fill_eat++;
 		if (ctx_simulation->number_fill_eat == \
@@ -34,6 +34,6 @@ void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 			printf("全員たべきった。end!!!\n");
 			exit(0);//todo:諸々free(ifを抜けないならunlockも？)
 		}
-		pthread_mutex_unlock(ctx_simulation->->mutex_fill_eat);
+		pthread_mutex_unlock(ctx_simulation->mutex_fill_eat);
 	}
 }
