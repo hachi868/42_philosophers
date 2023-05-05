@@ -40,9 +40,9 @@ static t_simulation	*init_simulation(int argc, char **argv)//todo:Rename
 	else
 		ctx_simulation->number_of_times_each_philosopher_must_eat = -1;
 	ctx_simulation->number_fill_eat = 0;
-	ctx_simulation->mutex_eat = \
+	ctx_simulation->->mutex_fill_eat = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (pthread_mutex_init(ctx_simulation->mutex_eat, NULL) != 0)
+	if (pthread_mutex_init(ctx_simulation->->mutex_fill_eat, NULL) != 0)
 		exit(1);//todo:free
 	//todo: errorcheck return 1
 //	if (arg_error)

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 02:40:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/05 17:49:58 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ typedef struct s_simulation
 	int				time_to_sleep;
 	int				number_of_times_each_philosopher_must_eat;
 	int				number_fill_eat;
-	pthread_mutex_t	*mutex_eat;
+	pthread_mutex_t	*mutex_fill_eat;
+	bool			is_end;
+	pthread_mutex_t	*mutex_is_end;
 }	t_simulation;
 
 struct s_philo_info
