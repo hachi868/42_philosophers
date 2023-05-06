@@ -6,38 +6,27 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 18:48:16 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/07 02:33:40 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philosophers.h"
 
-// pthread_createの第3引数として渡す。
-// voidポインタをreturnし、voidポインタの引数を1つ取る関数でないといけない。
 static void	*thread_func(void *arg)
 {
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
-	//シミュレーションの終了は全員規定回食べたor死なのでこのループでは制御していない
 	while (1)
 	{
-		//1.食べる
-		pthread_mutex_lock(philo->spork);
-		take_a_fork(philo->ctx_simulation, philo->index);
-		pthread_mutex_lock(philo->folk);
-		take_a_fork(philo->ctx_simulation, philo->index);
-		do_eat(philo->ctx_simulation, philo);
-		pthread_mutex_unlock(philo->folk);
-		pthread_mutex_unlock(philo->spork);
-		//2.寝る
-		do_sleep(philo->ctx_simulation, philo);
-		//3.考える
-		do_think(philo);
-		//break ;//todo:それぞれの動作で終了条件trueを観測できたら
+		if (do_eat(philo->ctx_simulation, philo) == 1)
+			break ;
+		if (do_sleep(philo->ctx_simulation, philo) == 1)
+			break ;
+		if (do_think(philo) == 1)
+			break ;
 	}
 	return ((void *)philo);
-	//todo:絶対にreturnさせたい
 }
 
 void	init_philo(t_simulation *ctx_simulation, int i)
