@@ -17,6 +17,6 @@ int	do_think(t_philo_info *philo)
 	if (check_end(philo->ctx_simulation))
 		return (1);
 	printf("%lld %d is thinking\n", get_timestamp(), philo->index);
-	usleep(100);//todo:停止時間検討
+	//usleep(100);//todo:停止時間検討
 	return (0);
 }
