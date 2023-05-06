@@ -40,7 +40,7 @@ static void	*thread_func(void *arg)
 	//todo:絶対にreturnさせたい
 }
 
-void	init_philo_info(t_simulation *ctx_simulation, int i)
+void	init_philo(t_simulation *ctx_simulation, int i)
 {
 	t_philo_info	*philo_info;
 	int				num_philo;
@@ -94,7 +94,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 	i = 0;
 	while (i < num_threads)
 	{
-		init_philo_info(ctx_simulation, i);
+		init_philo(ctx_simulation, i);
 		i++;
 	}
 	i = 0;
