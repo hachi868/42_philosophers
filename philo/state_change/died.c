@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 03:06:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 18:30:28 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	check_living(t_philo_info *philo)
 	if (tm - time_limit >= philo->time_last_eaten)
 	{
 		philo->ctx_simulation->is_end = true;
-		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
 		is_died(philo);
+		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
 		return ;
 	}
 	pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
@@ -68,7 +68,7 @@ void	init_monitoring(t_philo_info *philo)
 	{
 		printf("is_end\n");
 		//todo:free
-		exit(0);
+		//exit(0);
 	}
 	pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
 }
