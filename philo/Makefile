@@ -13,6 +13,7 @@ PROG := philo
 
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -g
+LDFLAGS = -lpthread
 SRCS =	main.c\
 		init_simulation.c\
 		state_change/eating.c\
@@ -28,7 +29,10 @@ SRCS =	main.c\
 OBJS := $(SRCS:.c=.o)
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(LDFLAGS) -o $@ $(OBJS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $<
 
 all: $(PROG)
 
