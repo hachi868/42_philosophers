@@ -6,14 +6,21 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 17:59:00 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 18:45:20 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
+void	take_a_fork(t_simulation *ctx_simulation, int index)
+{
+	check_end(ctx_simulation);
+	printf("%lld %d has taken a fork\n", get_timestamp(), index);
+}
+
 void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 {
+	check_end(ctx_simulation);
 	philo->time_last_eaten = get_timestamp();
 	init_monitoring(philo);
 	printf("%lld %d is eating\n", philo->time_last_eaten, philo->index);
@@ -33,7 +40,8 @@ void	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 			philo->ctx_simulation->is_end = true;
 			printf("全員たべきった。end!!!\n");
 			pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
-			exit(0);//todo:諸々free(ifを抜けないならunlockも？)
+			free_all_at_last(philo->ctx_simulation);
+			//exit(0);//todo:諸々free(ifを抜けないならunlockも？)
 		}
 		pthread_mutex_unlock(ctx_simulation->mutex_fill_eat);
 	}

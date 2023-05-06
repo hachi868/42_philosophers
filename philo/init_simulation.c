@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 03:17:07 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 18:48:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	*thread_func(void *arg)
 	{
 		//1.食べる
 		pthread_mutex_lock(philo->spork);
-		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);//todo: is_endで止める
+		take_a_fork(philo->ctx_simulation, philo->index);
 		pthread_mutex_lock(philo->folk);
-		printf("%lld %d has taken a fork\n", get_timestamp(), philo->index);
+		take_a_fork(philo->ctx_simulation, philo->index);
 		do_eat(philo->ctx_simulation, philo);
 		pthread_mutex_unlock(philo->folk);
 		pthread_mutex_unlock(philo->spork);
@@ -37,6 +37,7 @@ static void	*thread_func(void *arg)
 		//break ;//todo:それぞれの動作で終了条件trueを観測できたら
 	}
 	return ((void *)philo);
+	//todo:絶対にreturnさせたい
 }
 
 void	init_philo_info(t_simulation *ctx_simulation, int i)

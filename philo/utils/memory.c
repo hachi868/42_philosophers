@@ -6,18 +6,17 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/04 15:51:16 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 18:34:50 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	free_all(t_philo_info *philo)
+void	free_all_at_last(t_simulation *ctx_simulation)
 {
-	(void)philo;
-//	clear_philo(philo);
-//	free(philo);
-//	philo = NULL;
+	(void)ctx_simulation;
+	printf("終了！\n");
+	exit(0);
 }
 
 int	free_and_null(void **ptr)

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 02:50:42 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/06 18:45:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ struct s_philo_info
 int			start_simulation(t_simulation *ctx_simulation);
 
 // state_change/eating.c
+void		take_a_fork(t_simulation *ctx_simulation, int index);
 void		do_eat(t_simulation *ctx_simulation, t_philo_info *philo);
 
 // state_change/sleeping.c
@@ -72,6 +73,10 @@ int			ft_atoi_unsigned(char *str_num);
 
 // utils/print.c
 long long	get_timestamp(void);
+
+// utils/memory.c
+void		free_all_at_last(t_simulation *ctx_simulation);
+int			free_and_null(void **ptr);
 
 // utils/check_end.c
 void		check_end(t_simulation *ctx_simulation);
