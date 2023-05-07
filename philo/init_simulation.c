@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/07 02:33:40 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 01:22:43 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,14 @@ static void	*thread_func(void *arg)
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
+	if (philo->ctx_simulation->number_of_philosophers % 2 == 1)
+	{
+		if (philo->index == 1)
+			usleep(200);
+		else if (philo->index % 2 == 0)
+			usleep(100);
+	}
+
 	while (1)
 	{
 		if (do_eat(philo->ctx_simulation, philo) == 1)
@@ -56,6 +64,10 @@ void	init_philo(t_simulation *ctx_simulation, int i)
 	}
 	philo_info->time_last_eaten = get_timestamp();
 	philo_info->count_eaten = 0;
+	if (i % 5 < 3)
+		philo_info->time_to_think = ctx_simulation->time_to_eat;
+	else
+		philo_info->time_to_think = 0;
 	philo_info->thread = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\
 		philo_info->thread, NULL, thread_func, (void *)philo_info) != 0)
