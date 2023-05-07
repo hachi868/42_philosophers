@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/06 18:39:38 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 01:58:58 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_living(t_philo_info *philo)
 		return ;
 	}
 	tm = get_timestamp();
-	if (tm - time_limit >= philo->time_last_eaten)
+	if (tm - time_limit > philo->time_last_eaten)
 	{
 		philo->ctx_simulation->is_end = true;
 		is_died(philo);
@@ -54,15 +54,19 @@ void	init_monitoring(t_philo_info *philo)
 		monitoring, NULL, thread_monitoring, (void *)philo) != 0)
 	{
 		printf("Error!スレッド作れなかった init_monitoring\n");
-		//todo:free
+		free(monitoring);
+		monitoring = NULL;
 		return ;//error
 	}
 	if (pthread_detach(*monitoring) != 0)
 	{
 		printf("Error!スレッド待ち失敗");
-		//todo:free
-		return ;
+		free(monitoring);
+		monitoring = NULL;
+		return ;//error
 	}
+	free(monitoring);
+	monitoring = NULL;
 }
 
 void	is_died(t_philo_info *philo)
