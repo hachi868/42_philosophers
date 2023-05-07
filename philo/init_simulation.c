@@ -110,7 +110,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 		ctx_simulation->philo_list[i]->thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
 		i++;
 	}
-	printf("全スレッド終わり");
+	//printf("全スレッド終わり");
 	return (0);
 }
 //右利きと左利きが交互に座っている
