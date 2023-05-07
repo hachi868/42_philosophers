@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 01:22:43 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 02:07:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	init_philo(t_simulation *ctx_simulation, int i)
 	}
 	philo_info->time_last_eaten = get_timestamp();
 	philo_info->count_eaten = 0;
-	if (i % 5 < 3)
+	if (num_philo % 2 == 1 && i % 5 < 3)
 		philo_info->time_to_think = ctx_simulation->time_to_eat;
 	else
 		philo_info->time_to_think = 0;
