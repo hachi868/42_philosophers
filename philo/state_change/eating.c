@@ -55,6 +55,8 @@ static void	check_each_eaten(t_simulation *ctx_simulation, t_philo_info *philo)
 
 int	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 {
+	pthread_mutex_t	*tmp;
+
 	if (check_end(ctx_simulation))
 		return (1);
 	pthread_mutex_lock(philo->spork);
@@ -76,5 +78,11 @@ int	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 		check_each_eaten(ctx_simulation, philo);
 	pthread_mutex_unlock(philo->folk);
 	pthread_mutex_unlock(philo->spork);
+	if (philo->index == ctx_simulation->number_of_philosophers)
+	{
+		tmp = philo->spork;
+		philo->spork = philo->folk;
+		philo->folk = tmp;
+	}
 	return (0);
 }
