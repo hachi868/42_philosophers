@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 22:55:50 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 01:54:53 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,20 @@
 # include <string.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+typedef enum s_status
+{
+	ENDED,
+	NOT_ENDED
+}	t_status;
+
+typedef enum s_action
+{
+	TAKE_A_FORK,
+	EAT,
+	SLEEP,
+	THINK
+}	t_action;
 
 typedef struct s_philo_info	t_philo_info;
 
@@ -58,13 +72,13 @@ void		init_philo(t_simulation *ctx_simulation, int i);
 int			start_simulation(t_simulation *ctx_simulation);
 
 // state_change/eating.c
-int			do_eat(t_simulation *ctx_simulation, t_philo_info *philo);
+t_status	do_fork_and_eat(t_philo_info *philo);
 
 // state_change/sleeping.c
-int			do_sleep(t_simulation *ctx_simulation, t_philo_info *philo);
+t_status	do_sleep(t_philo_info *philo);
 
 // state_change/thinking.c
-int			do_think(t_philo_info *philo);
+t_status	do_think(t_philo_info *philo);
 
 // state_change/died.c
 void		check_living(t_philo_info *philo);
@@ -74,7 +88,7 @@ void		is_died(t_philo_info *philo);
 // utils/atoi.c
 int			ft_atoi_unsigned(char *str_num);
 
-// utils/print.c
+// utils/get_time.c
 long long	get_timestamp(void);
 long long	get_timestamp_diff(t_simulation *ctx_simulation);
 
@@ -82,7 +96,7 @@ long long	get_timestamp_diff(t_simulation *ctx_simulation);
 void		free_all_at_last(t_simulation *ctx_simulation);
 int			free_and_null(void **ptr);
 
-// utils/check_end.c
-bool		check_end(t_simulation *ctx_simulation);
+// utils/print.c
+bool		check_end_and_print(t_philo_info *philo, t_action action);
 
 #endif //PHILOSOPHERS_H

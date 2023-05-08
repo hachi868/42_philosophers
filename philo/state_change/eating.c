@@ -6,31 +6,29 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 23:00:10 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 01:57:55 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-static int	take_a_fork(t_simulation *ctx_simulation, int index)
+static t_status	do_take_a_fork(t_philo_info *philo)
 {
-	if (check_end(ctx_simulation))
-		return (1);
-	printf("%lld %d has taken a fork\n", \
-		get_timestamp_diff(ctx_simulation), index);
-	return (0);
+	if (check_end_and_print(philo, TAKE_A_FORK))
+		return (ENDED);
+	return (NOT_ENDED);
 }
 
-static int	setup_eating(t_simulation *ctx_simulation, t_philo_info *philo)
+static t_status	do_eat(t_philo_info *philo)
 {
-	if (check_end(ctx_simulation))
-		return (1);
 	philo->time_last_eaten = get_timestamp();
+//	printf("%lld %d is eating\n", \
+//		philo->time_last_eaten - philo->ctx_simulation->time_start, philo->index);
+	if (check_end_and_print(philo, EAT))
+		return (ENDED);
 	init_monitoring(philo);
-	printf("%lld %d is eating\n", \
-		philo->time_last_eaten - ctx_simulation->time_start, philo->index);
-	usleep(ctx_simulation->time_to_eat * 1000);
-	return (0);
+	usleep(philo->ctx_simulation->time_to_eat * 1000);
+	return (NOT_ENDED);
 }
 
 static void	check_each_eaten(t_simulation *ctx_simulation, t_philo_info *philo)
@@ -55,36 +53,26 @@ static void	check_each_eaten(t_simulation *ctx_simulation, t_philo_info *philo)
 	}
 }
 
-int	do_eat(t_simulation *ctx_simulation, t_philo_info *philo)
+t_status	do_fork_and_eat(t_philo_info *philo)
 {
-	pthread_mutex_t	*tmp;
-
-	if (check_end(ctx_simulation))
-		return (1);
 	pthread_mutex_lock(philo->spork);
-	if (take_a_fork(ctx_simulation, philo->index) == 1)
+	if (do_take_a_fork(philo) == ENDED)
 	{
 		pthread_mutex_unlock(philo->spork);
-		return (1);
+		return (ENDED);
 	}
 	pthread_mutex_lock(philo->folk);
-	if (take_a_fork(ctx_simulation, philo->index) == 1)
+	if (do_take_a_fork(philo) == ENDED)
 	{
 		pthread_mutex_unlock(philo->spork);
 		pthread_mutex_unlock(philo->folk);
-		return (1);
+		return (ENDED);
 	}
-	if (setup_eating(ctx_simulation, philo) == 1)
-		return (1);
-	if (ctx_simulation->number_of_times_each_philosopher_must_eat > 0)
-		check_each_eaten(ctx_simulation, philo);
+	if (do_eat(philo) == ENDED)
+		return (ENDED);
+	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0)
+		check_each_eaten(philo->ctx_simulation, philo);
 	pthread_mutex_unlock(philo->folk);
 	pthread_mutex_unlock(philo->spork);
-	if (philo->index == ctx_simulation->number_of_philosophers)
-	{
-		tmp = philo->spork;
-		philo->spork = philo->folk;
-		philo->folk = tmp;
-	}
-	return (0);
+	return (NOT_ENDED);
 }

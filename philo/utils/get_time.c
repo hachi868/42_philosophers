@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_end.c                                        :+:      :+:    :+:   */
+/*   get_time.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/07 20:16:04 by hachi-gbg        ###   ########.fr       */
+/*   Created: 2023/05/07 19:55:07 by hachi-gbg         #+#    #+#             */
+/*   Updated: 2023/05/09 00:12:21 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-bool	check_end(t_simulation *ctx_simulation)
+long long	get_timestamp(void)
 {
-	pthread_mutex_lock(ctx_simulation->mutex_is_end);
-	if (ctx_simulation->is_end == true)
-	{
-		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
-		return (true);
-	}
-	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
-	return (false);
+	struct timeval	tv;
+	long long		m_sec;
+
+	gettimeofday(&tv, NULL);
+	m_sec = (long long)tv.tv_sec * 1000 + (long long)tv.tv_usec / 1000;
+	return (m_sec);
+}
+
+long long	get_timestamp_diff(t_simulation *ctx_simulation)
+{
+	return (get_timestamp() - ctx_simulation->time_start);
 }

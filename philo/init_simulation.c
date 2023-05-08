@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 22:58:58 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 01:26:42 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ static void	*thread_func(void *arg)
 
 	while (1)
 	{
-		if (do_eat(philo->ctx_simulation, philo) == 1)
+		if (do_fork_and_eat(philo) == ENDED)
 			break ;
-		if (do_sleep(philo->ctx_simulation, philo) == 1)
+		if (do_sleep(philo) == ENDED)
 			break ;
-		if (do_think(philo) == 1)
+		if (do_think(philo) == ENDED)
 			break ;
 	}
 	return ((void *)philo);

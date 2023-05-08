@@ -21,10 +21,10 @@ SRCS =	main.c\
 		state_change/thinking.c\
 		state_change/died.c\
 		utils/memory.c\
-		utils/print.c\
+		utils/get_time.c\
 		utils/ft_atoi_unsigned.c\
 		utils/check_error.c\
-		utils/check_end.c
+		utils/print.c
 
 OBJS := $(SRCS:.c=.o)
 

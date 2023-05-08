@@ -5,24 +5,48 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/23 23:49:37 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 22:55:41 by hachi-gbg        ###   ########.fr       */
+/*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
+/*   Updated: 2023/05/09 01:57:43 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-long long	get_timestamp(void)
+static char	*get_message(t_action action)
 {
-	struct timeval	tv;
-	long long		m_sec;
+	char	*message;
 
-	gettimeofday(&tv, NULL);
-	m_sec = (long long)tv.tv_sec * 1000 + (long long)tv.tv_usec / 1000;
-	return (m_sec);
+	if (action == TAKE_A_FORK)
+		message = "has taken a fork";
+	else if (action == EAT)
+		message = "is eating";
+	else if (action == SLEEP)
+		message = "is sleeping";
+	else if (action == THINK)
+		message = "is thinking";
+	else
+		message = "";
+	return (message);
 }
 
-long long	get_timestamp_diff(t_simulation *ctx_simulation)
+bool	check_end_and_print(t_philo_info *philo, t_action action)
 {
-	return (get_timestamp() - ctx_simulation->time_start);
+	char		*message;
+	long long	timestamp;
+
+	pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
+	if (philo->ctx_simulation->is_end == true)
+	{
+		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+		return (true);
+	}
+	message = get_message(action);
+	//todo: message = ""の場合？
+	if (action == EAT)
+		timestamp = philo->time_last_eaten - philo->ctx_simulation->time_start;
+	else
+		timestamp = get_timestamp_diff(philo->ctx_simulation);
+	printf("%lld %d %s\n", timestamp, philo->index, message);
+	pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+	return (false);
 }
