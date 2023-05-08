@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 01:26:42 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 02:03:59 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,9 @@ int	start_simulation(t_simulation *ctx_simulation)
 			//todo:free
 			return (1);
 		}
-		ctx_simulation->philo_list[i]->thread = NULL;//pthread_joinはfreeされる？NULL埋めしておく
+		ctx_simulation->philo_list[i]->thread = NULL;
 		i++;
 	}
 	//printf("全スレッド終わり");
 	return (0);
 }
-//右利きと左利きが交互に座っている
-//フォークを2本take
-//食べる
-//フォークを置く
-//寝る
-//思考
-//まず先割れスプーンをとる。
-// フォークが空いてたら取る。
-//取れなかったら一旦置く
-
-//食事を開始したら、time_last_eatenに記録。time_to_die秒後に様子を見る。time_last_eatenとの差分で死んでるか判定。
-//食事が終わったら食事回数++

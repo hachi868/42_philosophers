@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 01:57:43 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 02:06:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ bool	check_end_and_print(t_philo_info *philo, t_action action)
 	message = get_message(action);
 	//todo: message = ""の場合？
 	if (action == EAT)
+	{
+		philo->time_last_eaten = get_timestamp();
 		timestamp = philo->time_last_eaten - philo->ctx_simulation->time_start;
+	}
 	else
 		timestamp = get_timestamp_diff(philo->ctx_simulation);
 	printf("%lld %d %s\n", timestamp, philo->index, message);

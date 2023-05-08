@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 01:57:55 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/09 02:02:54 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ static t_status	do_take_a_fork(t_philo_info *philo)
 
 static t_status	do_eat(t_philo_info *philo)
 {
-	philo->time_last_eaten = get_timestamp();
-//	printf("%lld %d is eating\n", \
-//		philo->time_last_eaten - philo->ctx_simulation->time_start, philo->index);
 	if (check_end_and_print(philo, EAT))
 		return (ENDED);
 	init_monitoring(philo);
@@ -31,16 +28,16 @@ static t_status	do_eat(t_philo_info *philo)
 	return (NOT_ENDED);
 }
 
-static void	check_each_eaten(t_simulation *ctx_simulation, t_philo_info *philo)
+static void	check_each_eaten(t_philo_info *philo)
 {
 	philo->count_eaten++;
 	if (philo->count_eaten == \
-		ctx_simulation->number_of_times_each_philosopher_must_eat)
+		philo->ctx_simulation->number_of_times_each_philosopher_must_eat)
 	{
-		pthread_mutex_lock(ctx_simulation->mutex_fill_eat);
-		ctx_simulation->number_fill_eat++;
-		if (ctx_simulation->number_fill_eat == \
-			ctx_simulation->number_of_philosophers)
+		pthread_mutex_lock(philo->ctx_simulation->mutex_fill_eat);
+		philo->ctx_simulation->number_fill_eat++;
+		if (philo->ctx_simulation->number_fill_eat == \
+			philo->ctx_simulation->number_of_philosophers)
 		{
 			pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
 			philo->ctx_simulation->is_end = true;
@@ -49,7 +46,7 @@ static void	check_each_eaten(t_simulation *ctx_simulation, t_philo_info *philo)
 			free_all_at_last(philo->ctx_simulation);//todo:ここではなく戻り先がよいかも
 			//exit(0);//todo:諸々free(ifを抜けないならunlockも？)
 		}
-		pthread_mutex_unlock(ctx_simulation->mutex_fill_eat);
+		pthread_mutex_unlock(philo->ctx_simulation->mutex_fill_eat);
 	}
 }
 
@@ -71,7 +68,7 @@ t_status	do_fork_and_eat(t_philo_info *philo)
 	if (do_eat(philo) == ENDED)
 		return (ENDED);
 	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0)
-		check_each_eaten(philo->ctx_simulation, philo);
+		check_each_eaten(philo);
 	pthread_mutex_unlock(philo->folk);
 	pthread_mutex_unlock(philo->spork);
 	return (NOT_ENDED);
