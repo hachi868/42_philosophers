@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 01:18:07 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 22:55:50 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_simulation
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
+	long long		time_start;
 	int				number_of_times_each_philosopher_must_eat;
 	int				number_fill_eat;
 	pthread_mutex_t	*mutex_fill_eat;
@@ -75,6 +76,7 @@ int			ft_atoi_unsigned(char *str_num);
 
 // utils/print.c
 long long	get_timestamp(void);
+long long	get_timestamp_diff(t_simulation *ctx_simulation);
 
 // utils/memory.c
 void		free_all_at_last(t_simulation *ctx_simulation);

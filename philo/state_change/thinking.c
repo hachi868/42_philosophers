@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:27 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 02:08:56 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 22:58:34 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	do_think(t_philo_info *philo)
 {
 	if (check_end(philo->ctx_simulation))
 		return (1);
-	printf("%lld %d is thinking\n", get_timestamp(), philo->index);
+	printf("%lld %d is thinking\n", \
+		get_timestamp_diff(philo->ctx_simulation), philo->index);
 	if (philo->ctx_simulation->number_of_philosophers % 2 == 0)
 		return (0);
 	if (philo->time_to_think > 0)

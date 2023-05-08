@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 02:07:29 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 22:58:58 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 			exit(1);//todo:free
 		i++;
 	}
+	ctx_simulation->time_start = get_timestamp();
 	i = 0;
 	while (i < num_threads)
 	{

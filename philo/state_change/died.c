@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 01:58:58 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/08 22:57:17 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	init_monitoring(t_philo_info *philo)
 void	is_died(t_philo_info *philo)
 {
 	//todo:諸々free
-	printf("%lld %d died\n", get_timestamp(), philo->index);
+	printf("%lld %d died\n", \
+		get_timestamp_diff(philo->ctx_simulation), philo->index);
 	free_all_at_last(philo->ctx_simulation);
 }
