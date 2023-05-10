@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 02:03:59 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/10 22:31:06 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,6 @@ int	start_simulation(t_simulation *ctx_simulation)
 		ctx_simulation->philo_list[i]->thread = NULL;
 		i++;
 	}
-	//printf("全スレッド終わり");
+	free_all_at_last(ctx_simulation);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 01:54:53 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/10 22:23:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_status	do_sleep(t_philo_info *philo);
 t_status	do_think(t_philo_info *philo);
 
 // state_change/died.c
-void		check_living(t_philo_info *philo);
+void		check_living(t_simulation *ctx_simulation, t_philo_info *philo);
 void		init_monitoring(t_philo_info *philo);
 void		is_died(t_philo_info *philo);
 
@@ -94,7 +94,8 @@ long long	get_timestamp_diff(t_simulation *ctx_simulation);
 
 // utils/memory.c
 void		free_all_at_last(t_simulation *ctx_simulation);
-int			free_and_null(void **ptr);
+int			free_and_null(t_philo_info **ptr);
+int			free_and_null2(pthread_mutex_t **ptr);
 
 // utils/print.c
 bool		check_end_and_print(t_philo_info *philo, t_action action);

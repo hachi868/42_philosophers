@@ -6,34 +6,34 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/08 22:57:17 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/10 22:28:42 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-void	check_living(t_philo_info *philo)
+void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 {
-	long long	tm;
-	long long	time_limit;
+	long long		tm;
+	long long		time_limit;
 
-	time_limit = philo->ctx_simulation->time_to_die;
+	time_limit = ctx_simulation->time_to_die;
 	usleep(time_limit * 1000);
-	pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
-	if (philo->ctx_simulation->is_end == true)
+	pthread_mutex_lock(ctx_simulation->mutex_is_end);
+	if (ctx_simulation->is_end == true)
 	{
-		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 		return ;
 	}
 	tm = get_timestamp();
 	if (tm - time_limit > philo->time_last_eaten)
 	{
-		philo->ctx_simulation->is_end = true;
+		ctx_simulation->is_end = true;
 		is_died(philo);
-		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 		return ;
 	}
-	pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 }
 
 static void	*thread_monitoring(void *arg)
@@ -41,7 +41,7 @@ static void	*thread_monitoring(void *arg)
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
-	check_living(philo);
+	check_living(philo->ctx_simulation, philo);
 	return (NULL);
 }
 
@@ -71,8 +71,6 @@ void	init_monitoring(t_philo_info *philo)
 
 void	is_died(t_philo_info *philo)
 {
-	//todo:諸々free
 	printf("%lld %d died\n", \
 		get_timestamp_diff(philo->ctx_simulation), philo->index);
-	free_all_at_last(philo->ctx_simulation);
 }
