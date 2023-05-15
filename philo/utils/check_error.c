@@ -6,22 +6,40 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:39:11 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/05 17:46:42 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/16 03:04:11 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-bool	is_invalid_args(int argc, char **argv)
+int	free_args(int argc, int **ptr)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
-		if (argv[i][0] == '\0')
-			return (true);
+		free(*ptr);
+		*ptr = NULL;
 		i++;
 	}
-	return (false);
+	return (0);
+}
+
+bool	is_invalid_args(int argc, char **argv, int *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < argc - 1)
+	{
+		args[i] = ft_atoi_unsigned(argv[i + 1]);
+		if (args[i] < 0)
+		{
+			free_args(argc, &args);
+			return (false);
+		}
+		i++;
+	}
+	return (true);
 }

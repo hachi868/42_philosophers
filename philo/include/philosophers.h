@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/10 22:23:37 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/16 03:04:03 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,12 @@ void		check_living(t_simulation *ctx_simulation, t_philo_info *philo);
 void		init_monitoring(t_philo_info *philo);
 void		is_died(t_philo_info *philo);
 
-// utils/atoi.c
-int			ft_atoi_unsigned(char *str_num);
+// utils/ft_atoi_unsigned.c
+int			free_args(int argc, int **ptr);
+int			ft_atoi_unsigned(const char *str_num);
+
+// utils/check_error.c
+bool		is_invalid_args(int argc, char **argv, int *args);
 
 // utils/get_time.c
 long long	get_timestamp(void);

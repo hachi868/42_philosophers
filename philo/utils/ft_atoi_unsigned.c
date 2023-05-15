@@ -6,13 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:52:01 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/04/24 00:28:20 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/05/16 02:27:01 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-int	ft_atoi_unsigned(char *str_num)
+int	ft_atoi_unsigned(const char *str_num)
 {
 	size_t	i;
 	int		num;
@@ -25,6 +25,8 @@ int	ft_atoi_unsigned(char *str_num)
 		return (-1);
 	else if (str_num[i] == '+')
 		i++;
+	if (!(str_num[i] >= '0' && str_num[i] <= '9'))
+		return (-1);
 	while (str_num[i] >= '0' && str_num[i] <= '9')
 	{
 		num = num * 10 + (str_num[i] - '0');
@@ -32,7 +34,7 @@ int	ft_atoi_unsigned(char *str_num)
 	}
 	return (num);
 }
-//todo: 引数不正どこまで弾くか？"1 42"や+6.4cのようなもの
+
 //int	main(void)
 //{
 //	printf("%s => %d:%d\n", "1", atoi("1"), ft_atoi_unsigned("1"));
@@ -41,6 +43,10 @@ int	ft_atoi_unsigned(char *str_num)
 //	printf("%s => %d:%d\n", "++1", atoi("++1"), ft_atoi_unsigned("++1"));
 //	printf("%s => %d:%d\n", "+1", atoi("+1"), ft_atoi_unsigned("+1"));
 //	printf("%s => %d:%d\n", "-1", atoi("-1"), ft_atoi_unsigned("-1"));
+//	printf("%s => %d:%d\n", "+0", atoi("+0"), ft_atoi_unsigned("+0"));
+//	printf("%s => %d:%d\n", "-0", atoi("-0"), ft_atoi_unsigned("-0"));
+//	printf("%s => %d:%d\n", "+", atoi("+"), ft_atoi_unsigned("+"));
+//	printf("%s => %d:%d\n", "-", atoi("-"), ft_atoi_unsigned("-"));
 //	printf("%s => %d:%d\n", "+42lyon", atoi("+42lyon"), ft_atoi_unsigned("+42lyon"));
 //	printf("%s => %d:%d\n", "+101", atoi("+101"), ft_atoi_unsigned("+101"));
 //  printf("%s => %d:%d\n",
