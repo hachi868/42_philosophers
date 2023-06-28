@@ -12,7 +12,7 @@
 PROG := philo
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g
+CFLAGS := -Wall -Wextra -Werror
 LDFLAGS = -lpthread
 SRCS =	main.c\
 		init_simulation.c\

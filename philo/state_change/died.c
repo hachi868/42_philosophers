@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/10 22:28:42 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/06/29 00:03:54 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	long long		time_limit;
 
 	time_limit = ctx_simulation->time_to_die;
-	usleep(time_limit * 1000);
+	usleep_with_precision(ctx_simulation, time_limit);
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/16 03:04:03 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/06/28 20:54:32 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ bool		is_invalid_args(int argc, char **argv, int *args);
 // utils/get_time.c
 long long	get_timestamp(void);
 long long	get_timestamp_diff(t_simulation *ctx_simulation);
+void		usleep_with_precision(t_simulation *ctx_simulation, long long sec_limit);
 
 // utils/memory.c
 void		free_all_at_last(t_simulation *ctx_simulation);
