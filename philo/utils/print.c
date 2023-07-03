@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 17:31:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 18:07:20 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ bool check_end_and_print(t_philo_info *philo, t_action action)
 	// EATの場合、食べ終わりでここにきている？
 	if (action == EAT)
 	{
-		philo->time_last_eaten = get_timestamp();
-		timestamp = philo->time_last_eaten - philo->ctx_simulation->time_start;
+		philo->time_last_eaten = get_timestamp_diff(philo->ctx_simulation);
+		timestamp = philo->time_last_eaten;
 	}
 	else
 	{
