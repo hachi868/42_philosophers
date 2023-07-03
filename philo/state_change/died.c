@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 01:03:37 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 02:56:11 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,11 @@ void	init_monitoring(t_philo_info *philo)
 //訃報
 void	is_died(t_philo_info *philo)
 {
+	if (philo->is_take_spork == true)
+	{
+		pthread_mutex_unlock(philo->spork);
+		philo->is_take_spork = false;
+	}
 	printf("%lld %d died\n", \
 		get_timestamp_diff(philo->ctx_simulation), philo->index);
 }
