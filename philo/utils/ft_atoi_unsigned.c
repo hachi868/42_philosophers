@@ -6,12 +6,12 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:52:01 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/16 02:27:01 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 17:03:02 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-
+//argv intに変換
 int	ft_atoi_unsigned(const char *str_num)
 {
 	size_t	i;

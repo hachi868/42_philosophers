@@ -6,12 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/06/30 02:58:55 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 17:11:38 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
+// 生死確認 本体
 void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 {
 	long long		tm;
@@ -20,6 +21,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	time_limit = ctx_simulation->time_to_die;
 	printf("check_living %lld %lld\n", philo->time_last_eaten, time_limit);
 	usleep_with_precision(ctx_simulation, time_limit);
+	//is_end mutex
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{
@@ -28,6 +30,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	}
 	tm = get_timestamp();
 	printf("%lld > %lld\n", tm - time_limit, philo->time_last_eaten);
+	//タイムリミットover is_end = true
 	if (tm - time_limit > philo->time_last_eaten)
 	{
 		ctx_simulation->is_end = true;
@@ -38,6 +41,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 }
 
+//チェック関数
 static void	*thread_monitoring(void *arg)
 {
 	t_philo_info	*philo;
@@ -47,6 +51,7 @@ static void	*thread_monitoring(void *arg)
 	return (NULL);
 }
 
+//死亡監視 init
 void	init_monitoring(t_philo_info *philo)
 {
 	pthread_t	*monitoring;
@@ -71,6 +76,7 @@ void	init_monitoring(t_philo_info *philo)
 	monitoring = NULL;
 }
 
+//訃報
 void	is_died(t_philo_info *philo)
 {
 	printf("%lld %d died\n", \

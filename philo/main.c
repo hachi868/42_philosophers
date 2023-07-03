@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/16 03:06:05 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 16:06:26 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
+		// 引数チェック
 		args = (int *)malloc(sizeof(int) * argc);
 		if (is_invalid_args(argc, argv, args) == false)
-			return (1);//todo:end,show_error?
+			return (1); // todo:end,show_error?
+		// OKならシミュレーション開始
 		ctx_simulation = init_simulation(argc, args);
 		if (ctx_simulation == NULL)
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/06/28 20:54:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 15:41:00 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,30 @@ typedef struct s_philo_info	t_philo_info;
 
 typedef struct s_simulation
 {
-	t_philo_info	**philo_list;
-	pthread_mutex_t	**folk_list;
-	int				number_of_philosophers;
-	int				time_to_die;
-	int				time_to_eat;
-	int				time_to_sleep;
-	long long		time_start;
-	int				number_of_times_each_philosopher_must_eat;
-	int				number_fill_eat;
-	pthread_mutex_t	*mutex_fill_eat;
-	bool			is_end;
-	pthread_mutex_t	*mutex_is_end;
+	t_philo_info	**philo_list;//哲学者全員
+	pthread_mutex_t **folk_list; // フォークのmutex list
+	int number_of_philosophers;	 // 哲学者人数
+	int				time_to_die;//死ぬまでのリミット
+	int				time_to_eat;//食事時間
+	int				time_to_sleep;//睡眠時間
+	long long		time_start;//開始時間(０リセット基準)
+	int				number_of_times_each_philosopher_must_eat;//食べたら止まる場合の回数
+	int				number_fill_eat;//食べきった哲学者の数
+	pthread_mutex_t *mutex_fill_eat; // number_fill_eatのためのmutex
+	bool			is_end;//終わりフラグ
+	pthread_mutex_t *mutex_is_end; // is_endのためのmutex
 }	t_simulation;
 
 struct s_philo_info
 {
-	t_simulation	*ctx_simulation;
-	int				index;
-	pthread_t		*thread;
-	pthread_mutex_t	*spork;
-	pthread_mutex_t	*folk;
-	int				time_to_think;
-	long long		time_last_eaten;
-	int				count_eaten;
+	t_simulation	*ctx_simulation;//全部入り
+	int				index;//哲学者ナンバリング 1からスタート（奇数は左きき、偶数は右利き）
+	pthread_t		*thread;//哲学者はthreadである
+	pthread_mutex_t	*spork;//スポーク（奇数なら右、偶数なら左）
+	pthread_mutex_t *folk; // フォーク（奇数なら左、偶数なら右）
+	int				time_to_think;//食べるまでの思考時間
+	long long		time_last_eaten;//最後に食べた時間
+	int count_eaten;				// 食べた回数
 };
 
 // init_simulation.c

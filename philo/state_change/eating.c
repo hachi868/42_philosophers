@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/06/29 00:00:39 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 17:18:13 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ static t_status	do_eat(t_philo_info *philo)
 {
 	if (check_end_and_print(philo, EAT))
 		return (ENDED);
+	//食べ始めで死亡監視はじめ
 	init_monitoring(philo);
 	usleep_with_precision(philo->ctx_simulation, philo->ctx_simulation->time_to_eat);
 	return (NOT_ENDED);
 }
 
+//食べた回数のチェック
 static void	check_each_eaten(t_philo_info *philo)
 {
 	philo->count_eaten++;
@@ -36,6 +38,7 @@ static void	check_each_eaten(t_philo_info *philo)
 	{
 		pthread_mutex_lock(philo->ctx_simulation->mutex_fill_eat);
 		philo->ctx_simulation->number_fill_eat++;
+		//全員食べきってis_end
 		if (philo->ctx_simulation->number_fill_eat == \
 			philo->ctx_simulation->number_of_philosophers)
 		{
@@ -52,6 +55,7 @@ static void	check_each_eaten(t_philo_info *philo)
 
 t_status	do_fork_and_eat(t_philo_info *philo)
 {
+	//フォークmutexlockしつつ1本ずつ取る。利き手じゃない方から。
 	pthread_mutex_lock(philo->spork);
 	if (do_take_a_fork(philo) == ENDED)
 	{
