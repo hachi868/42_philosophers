@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:55:07 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/06/29 00:07:38 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/06/30 02:53:43 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	usleep_with_precision(t_simulation *ctx_simulation, long long sec_limit)
 
 	time_start_usleep = get_timestamp_diff(ctx_simulation);
 	while (get_timestamp_diff(ctx_simulation) - time_start_usleep < sec_limit)
-		usleep(10);
+		usleep(100);
 }

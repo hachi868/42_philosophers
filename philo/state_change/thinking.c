@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:27 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/05/09 01:58:00 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/06/29 00:57:42 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_status	do_think(t_philo_info *philo)
 		return (NOT_ENDED);
 	if (philo->time_to_think > 0)
 	{
-		usleep(philo->time_to_think * 1000);
+		usleep_with_precision(philo->ctx_simulation, philo->time_to_think);
 		philo->time_to_think = 0;
 	}
 	else
