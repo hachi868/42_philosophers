@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 17:55:54 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 01:03:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 
 	time_limit = ctx_simulation->time_to_die;
 	//printf("check_living %lld %lld\n", philo->time_last_eaten, time_limit);
-	usleep_with_precision(ctx_simulation, time_limit);
+	usleep_with_precision(ctx_simulation, time_limit + 1);
 	//is_end mutex
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
@@ -29,7 +29,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 		return ;
 	}
 	tm = get_timestamp_diff(ctx_simulation);
-	printf("check_living %lld > %lld\n", tm - time_limit, philo->time_last_eaten);
+	//printf("check_living tm:%lld - time_limit:%lld / %lld  > time_last_eaten %lld\n", tm, time_limit, tm - time_limit, philo->time_last_eaten);
 	//タイムリミットover is_end = true
 	if (tm - time_limit > philo->time_last_eaten)
 	{

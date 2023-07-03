@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 17:45:28 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/03 23:33:39 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_philo(t_simulation *ctx_simulation, int i)
 		philo_info->spork = ctx_simulation->folk_list[i];
 	}
 	// 最後に食べた時間を開始時で初期化
-	philo_info->time_last_eaten = ctx_simulation->time_start;
+	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
 	if (num_philo % 2 == 1 && i % 5 < 3)//不明？？哲学者の人数が奇数、もう一つは？
 		philo_info->time_to_think = ctx_simulation->time_to_eat;
