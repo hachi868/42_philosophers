@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 17:18:13 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 02:35:17 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_status	do_eat(t_philo_info *philo)
 }
 
 //食べた回数のチェック
-static void	check_each_eaten(t_philo_info *philo)
+static bool	check_each_eaten(t_philo_info *philo)
 {
 	philo->count_eaten++;
 	if (philo->count_eaten == \
@@ -44,18 +44,19 @@ static void	check_each_eaten(t_philo_info *philo)
 		{
 			pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
 			philo->ctx_simulation->is_end = true;
-			//printf("全員たべきった。end!!!\n");
 			pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
-			free_all_at_last(philo->ctx_simulation);//todo:ここではなく戻り先がよいかも
-			//exit(0);//todo:諸々free(ifを抜けないならunlockも？)
+			printf("Simulation stops: All philosophers have eaten at least %d times\n", \
+				philo->ctx_simulation->number_of_times_each_philosopher_must_eat);
+			//free_all_at_last(philo->ctx_simulation);//todo:セグフォ
+			return (true);
 		}
 		pthread_mutex_unlock(philo->ctx_simulation->mutex_fill_eat);
 	}
+	return (false);
 }
 
 t_status	do_fork_and_eat(t_philo_info *philo)
 {
-	//フォークmutexlockしつつ1本ずつ取る。利き手じゃない方から。
 	pthread_mutex_lock(philo->spork);
 	if (do_take_a_fork(philo) == ENDED)
 	{
@@ -70,9 +71,18 @@ t_status	do_fork_and_eat(t_philo_info *philo)
 		return (ENDED);
 	}
 	if (do_eat(philo) == ENDED)
+	{
+		pthread_mutex_unlock(philo->folk);
+		pthread_mutex_unlock(philo->spork);
 		return (ENDED);
-	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0)
-		check_each_eaten(philo);
+	}
+	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0 \
+		&& check_each_eaten(philo) == true)
+	{
+		pthread_mutex_unlock(philo->folk);
+		pthread_mutex_unlock(philo->spork);
+		return (ENDED);
+	}
 	pthread_mutex_unlock(philo->folk);
 	pthread_mutex_unlock(philo->spork);
 	return (NOT_ENDED);

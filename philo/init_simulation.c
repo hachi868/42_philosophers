@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 23:33:39 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 02:34:27 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	*thread_func(void *arg)
 }
 
 //それぞれの哲学者init
-void	init_philo(t_simulation *ctx_simulation, int i)
+int	init_philo(t_simulation *ctx_simulation, int i)
 {
 	t_philo_info	*philo_info;
 	int				num_philo;
@@ -75,11 +75,12 @@ void	init_philo(t_simulation *ctx_simulation, int i)
 	if (pthread_create(\
 		philo_info->thread, NULL, thread_func, (void *)philo_info) != 0)
 	{
-		printf("Error!スレッド作れなかった init_philo_info\n");
+		printf("Error: init_philo: Failed to create a new thread using pthread_create.\n");
 		//todo:free
-		return ;//error
+		return (1);
 	}
 	init_monitoring(philo_info);
+	return (0);
 }
 
 int	start_simulation(t_simulation *ctx_simulation)
@@ -93,7 +94,10 @@ int	start_simulation(t_simulation *ctx_simulation)
 	while (i < num_threads)
 	{
 		if (pthread_mutex_init(ctx_simulation->folk_list[i], NULL) != 0)
-			exit(1);//todo:free
+		{
+			//todo:free
+			return (1);
+		}
 		i++;
 	}
 	//開始時間 定義
