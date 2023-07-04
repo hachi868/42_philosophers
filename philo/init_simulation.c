@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 02:46:42 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 13:00:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,9 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 		philo_info->spork = ctx_simulation->folk_list[i];
 	}
 	philo_info->is_take_spork = false;
-	// 最後に食べた時間を開始時で初期化
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
-	if (num_philo % 2 == 1 && i % 5 < 3)//不明？？哲学者の人数が奇数、もう一つは？
+	if (num_philo % 2 == 1 && i % 5 < 3)//todo: 奇数人の場合の調整
 		philo_info->time_to_think = ctx_simulation->time_to_eat;
 	else
 		philo_info->time_to_think = 0;
@@ -91,7 +90,6 @@ int	start_simulation(t_simulation *ctx_simulation)
 
 	num_threads = ctx_simulation->number_of_philosophers;//哲学者の数 = フォークの数
 	i = 0;
-	// フォークのmutexは全てを作ってしまう。哲学者に割り当てるため
 	while (i < num_threads)
 	{
 		if (pthread_mutex_init(ctx_simulation->folk_list[i], NULL) != 0)
@@ -101,22 +99,19 @@ int	start_simulation(t_simulation *ctx_simulation)
 		}
 		i++;
 	}
-	//開始時間 定義
 	ctx_simulation->time_start = get_timestamp();
-	// 哲学者 init
 	i = 0;
 	while (i < num_threads)
 	{
 		init_philo(ctx_simulation, i);
 		i++;
 	}
-	//終わり待ち
 	i = 0;
 	while (i < num_threads)
 	{
 		if (pthread_join(*ctx_simulation->philo_list[i]->thread, NULL) != 0)
 		{
-			printf("Error!スレッド待ち失敗");
+			printf("Error: start_simulation: Failed to create a new thread using pthread_join.\n");
 			//todo:free
 			return (1);
 		}

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 02:53:53 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:55:23 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ static bool	check_each_eaten(t_philo_info *philo)
 	return (false);
 }
 
+static	void	unlock_spork_and_folk(t_philo_info *philo)
+{
+	pthread_mutex_unlock(philo->spork);
+	pthread_mutex_unlock(philo->folk);
+}
+
 t_status	do_fork_and_eat(t_philo_info *philo)
 {
 	pthread_mutex_lock(philo->spork);
@@ -69,24 +75,20 @@ t_status	do_fork_and_eat(t_philo_info *philo)
 	pthread_mutex_lock(philo->folk);
 	if (do_take_a_fork(philo) == ENDED)
 	{
-		pthread_mutex_unlock(philo->spork);
-		pthread_mutex_unlock(philo->folk);
+		unlock_spork_and_folk(philo);
 		return (ENDED);
 	}
 	if (do_eat(philo) == ENDED)
 	{
-		pthread_mutex_unlock(philo->folk);
-		pthread_mutex_unlock(philo->spork);
+		unlock_spork_and_folk(philo);
 		return (ENDED);
 	}
 	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0 \
 		&& check_each_eaten(philo) == true)
 	{
-		pthread_mutex_unlock(philo->folk);
-		pthread_mutex_unlock(philo->spork);
+		unlock_spork_and_folk(philo);
 		return (ENDED);
 	}
-	pthread_mutex_unlock(philo->folk);
-	pthread_mutex_unlock(philo->spork);
+	unlock_spork_and_folk(philo);
 	return (NOT_ENDED);
 }

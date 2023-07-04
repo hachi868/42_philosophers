@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/03 18:07:20 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:57:12 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char *get_message(t_action action)
 {
-	char *message;
+	char	*message;
 
 	if (action == TAKE_A_FORK)
 		message = "has taken a fork";
@@ -37,16 +37,13 @@ bool check_end_and_print(t_philo_info *philo, t_action action)
 	long long timestamp;
 
 	pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
-	// is_end
 	if (philo->ctx_simulation->is_end == true)
 	{
 		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
 		return (true);
 	}
-	// まだis_endじゃない
 	message = get_message(action);
 	// todo: message = ""の場合？
-	// EATの場合、食べ終わりでここにきている？
 	if (action == EAT)
 	{
 		philo->time_last_eaten = get_timestamp_diff(philo->ctx_simulation);

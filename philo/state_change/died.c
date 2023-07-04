@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:18:33 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:53:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ void	init_monitoring(t_philo_info *philo)
 	monitoring = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\
 		monitoring, NULL, thread_monitoring, (void *)philo) != 0)
-		error_exit_monitoring(philo, monitoring, "init_monitoring",\
+		error_exit_monitoring(philo, monitoring, "init_monitoring", \
 		"Failed to create a new thread using pthread_create.");
 	if (pthread_detach(*monitoring) != 0)
-		error_exit_monitoring(philo, monitoring, "init_monitoring",\
+		error_exit_monitoring(philo, monitoring, "init_monitoring", \
 			"Failed to detach the thread using pthread_detach.");
 	free_and_null((void *)&monitoring);
 }

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:41:48 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:52:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,36 @@ static int	activate_each_must_eat(\
 	return (0);
 }
 
+static int	malloc_list_philo_fork(t_simulation *ctx_simulation)
+{
+	int	i;
+
+	i = 0;
+	while (i < ctx_simulation->number_of_philosophers)
+	{
+		ctx_simulation->philo_list[i] = \
+			(t_philo_info *)malloc(sizeof(t_philo_info));
+		if (ctx_simulation->philo_list[i] == NULL)
+		{
+			//todo: free;
+			return (1);
+		}
+		ctx_simulation->folk_list[i] = \
+			(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if (ctx_simulation->folk_list[i] == NULL)
+		{
+			//todo: free;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
 static t_simulation	*init_simulation(int argc, int *args)
 {
 	t_simulation	*ctx_simulation;
-	int				i;
 
-	i = 0;
 	ctx_simulation = (t_simulation *)malloc(sizeof(t_simulation));
 	if (activate_each_must_eat(ctx_simulation, argc, args) == 1)
 		free_all_at_last(ctx_simulation);//todo: freeしないといけないものが限定的
@@ -56,14 +80,8 @@ static t_simulation	*init_simulation(int argc, int *args)
 		sizeof(t_philo_info *) * ctx_simulation->number_of_philosophers);
 	ctx_simulation->folk_list = (pthread_mutex_t **)malloc(\
 		sizeof(pthread_mutex_t *) * ctx_simulation->number_of_philosophers);
-	while (i < ctx_simulation->number_of_philosophers)
-	{
-		ctx_simulation->philo_list[i] = \
-			(t_philo_info *)malloc(sizeof(t_philo_info));
-		ctx_simulation->folk_list[i] = \
-			(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		i++;
-	}
+	if (malloc_list_philo_fork(ctx_simulation) == 1)
+		free_all_at_last(ctx_simulation);//todo: freeしないといけないものが限定的
 	ctx_simulation->time_to_die = args[1];
 	ctx_simulation->time_to_eat = args[2];
 	ctx_simulation->time_to_sleep = args[3];
