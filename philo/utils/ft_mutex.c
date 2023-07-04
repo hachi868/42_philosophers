@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:12:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 17:55:23 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 18:10:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	unlock_mutex_all(t_simulation *ctx_simulation)
 			&ctx_simulation->philo_list[i]->spork, \
 			&ctx_simulation->philo_list[i]->is_lock_spork);
 		unlock_mutex(\
-			&ctx_simulation->philo_list[i]->folk, \
+			&ctx_simulation->philo_list[i]->fork, \
 			&ctx_simulation->philo_list[i]->is_lock_fork);
 		i++;
 	}

@@ -51,18 +51,18 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 	if (i % 2 == 0)
 	{
 		if (i == num_philo - 1)
-			philo_info->spork = ctx_simulation->folk_list[0];
+			philo_info->spork = ctx_simulation->fork_list[0];
 		else
-			philo_info->spork = ctx_simulation->folk_list[i + 1];
-		philo_info->folk = ctx_simulation->folk_list[i];
+			philo_info->spork = ctx_simulation->fork_list[i + 1];
+		philo_info->fork = ctx_simulation->fork_list[i];
 	}
 	else
 	{
 		if (i == num_philo - 1)
-			philo_info->folk = ctx_simulation->folk_list[0];
+			philo_info->fork = ctx_simulation->fork_list[0];
 		else
-			philo_info->folk = ctx_simulation->folk_list[i + 1];
-		philo_info->spork = ctx_simulation->folk_list[i];
+			philo_info->fork = ctx_simulation->fork_list[i + 1];
+		philo_info->spork = ctx_simulation->fork_list[i];
 	}
 	philo_info->is_lock_spork = false;
 	philo_info->is_lock_fork = false;
@@ -93,7 +93,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 	i = 0;
 	while (i < num_threads)
 	{
-		if (pthread_mutex_init(ctx_simulation->folk_list[i], NULL) != 0)
+		if (pthread_mutex_init(ctx_simulation->fork_list[i], NULL) != 0)
 		{
 			//todo:free
 			return (1);

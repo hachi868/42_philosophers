@@ -56,9 +56,9 @@ static int	malloc_list_philo_fork(t_simulation *ctx_simulation)
 			//todo: free;
 			return (1);
 		}
-		ctx_simulation->folk_list[i] = \
+		ctx_simulation->fork_list[i] = \
 			(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-		if (ctx_simulation->folk_list[i] == NULL)
+		if (ctx_simulation->fork_list[i] == NULL)
 		{
 			//todo: free;
 			return (1);
@@ -78,7 +78,7 @@ static t_simulation	*init_simulation(int argc, int *args)
 	ctx_simulation->number_of_philosophers = args[0];
 	ctx_simulation->philo_list = (t_philo_info **)malloc(\
 		sizeof(t_philo_info *) * ctx_simulation->number_of_philosophers);
-	ctx_simulation->folk_list = (pthread_mutex_t **)malloc(\
+	ctx_simulation->fork_list = (pthread_mutex_t **)malloc(\
 		sizeof(pthread_mutex_t *) * ctx_simulation->number_of_philosophers);
 	if (malloc_list_philo_fork(ctx_simulation) == 1)
 		free_all_at_last(ctx_simulation);//todo: freeしないといけないものが限定的

@@ -22,8 +22,8 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 	while (i < ctx_simulation->number_of_philosophers)
 	{
 		free_and_null((void *)&ctx_simulation->philo_list[i]);
-		pthread_mutex_destroy(ctx_simulation->folk_list[i]);
-		free_and_null((void *)&ctx_simulation->folk_list[i]);
+		pthread_mutex_destroy(ctx_simulation->fork_list[i]);
+		free_and_null((void *)&ctx_simulation->fork_list[i]);
 		i++;
 	}
 }

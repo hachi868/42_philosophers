@@ -64,10 +64,10 @@ static bool	check_each_eaten(t_philo_info *philo)
 }
 
 //todo: ENDEDの時は返り先でunlock_mutex_all(philo->ctx_simulation)でもよいかも。
-static	void	unlock_spork_and_folk(t_philo_info *philo)
+static	void	unlock_spork_and_fork(t_philo_info *philo)
 {
 	unlock_mutex(&philo->spork, &philo->is_lock_spork);
-	unlock_mutex(&philo->folk, &philo->is_lock_fork);
+	unlock_mutex(&philo->fork, &philo->is_lock_fork);
 }
 
 t_status	do_fork_and_eat(t_philo_info *philo)
@@ -78,18 +78,18 @@ t_status	do_fork_and_eat(t_philo_info *philo)
 		unlock_mutex(&philo->spork, &philo->is_lock_spork);
 		return (ENDED);
 	}
-	lock_mutex(&philo->folk, &philo->is_lock_fork);
+	lock_mutex(&philo->fork, &philo->is_lock_fork);
 	if (do_take_a_fork(philo) == ENDED)
 	{
-		unlock_spork_and_folk(philo);
+		unlock_spork_and_fork(philo);
 		return (ENDED);
 	}
 	if (do_eat(philo) == ENDED)
 	{
-		unlock_spork_and_folk(philo);
+		unlock_spork_and_fork(philo);
 		return (ENDED);
 	}
-	unlock_spork_and_folk(philo);
+	unlock_spork_and_fork(philo);
 	if (philo->ctx_simulation->number_of_times_each_philosopher_must_eat > 0 \
 		&& check_each_eaten(philo) == true)
 	{

@@ -42,7 +42,7 @@ typedef struct s_philo_info	t_philo_info;
 typedef struct s_simulation
 {
 	t_philo_info	**philo_list;//哲学者全員
-	pthread_mutex_t **folk_list; // フォークのmutex list
+	pthread_mutex_t **fork_list; // フォークのmutex list
 	int number_of_philosophers;	 // 哲学者人数
 	int				time_to_die;//死ぬまでのリミット
 	int				time_to_eat;//食事時間
@@ -64,7 +64,7 @@ struct s_philo_info
 	pthread_t		*thread;//哲学者はthreadである
 	pthread_mutex_t	*spork;//スポーク（奇数なら右、偶数なら左）
 	bool			is_lock_spork;//スポークを手にとっているか
-	pthread_mutex_t *folk; // フォーク（奇数なら左、偶数なら右）
+	pthread_mutex_t *fork; // フォーク（奇数なら左、偶数なら右）
 	bool			is_lock_fork;//フォークを手にとっているか
 	int				time_to_think;//食べるまでの思考時間
 	long long		time_last_eaten;//最後に食べた時間
