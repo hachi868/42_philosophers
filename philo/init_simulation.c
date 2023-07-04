@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 13:00:16 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 16:25:12 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 			philo_info->folk = ctx_simulation->folk_list[i + 1];
 		philo_info->spork = ctx_simulation->folk_list[i];
 	}
-	philo_info->is_taken_spork = false;
+	philo_info->is_lock_spork = false;
+	philo_info->is_lock_fork = false;
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
 	if (num_philo % 2 == 1 && i % 5 < 3)//todo: 奇数人の場合の調整
