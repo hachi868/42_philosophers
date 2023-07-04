@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:15:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:43:02 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 		}
 		i++;
 	}
+	unlock_mutex_all(ctx_simulation);
 	free_all_at_last(ctx_simulation);
 	return (0);
 }

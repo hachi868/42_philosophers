@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:12:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:11:51 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:25:47 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	unlock_mutex_all(t_simulation *ctx_simulation)
 {
 	int	i;
 
+	printf("unlock_mutex_all\n");
 	i = 0;
 	while (i < ctx_simulation->number_of_philosophers)
 	{
@@ -36,6 +37,7 @@ int	unlock_mutex_all(t_simulation *ctx_simulation)
 			&ctx_simulation->is_lock_fill_eat);
 		pthread_mutex_destroy(ctx_simulation->mutex_fill_eat);
 	}
+	printf("unlock_mutex_all end\n");
 	return (0);
 }
 

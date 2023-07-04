@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 18:25:36 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:45:13 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 		ctx_simulation->is_end = true;
 		unlock_mutex(\
 			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
-		is_died(philo);
+		printf("%lld %d died\n", \
+			get_timestamp_diff(philo->ctx_simulation), philo->index);
 		return ;
 	}
 	unlock_mutex(\
@@ -80,5 +81,4 @@ void	is_died(t_philo_info *philo)
 {
 	printf("%lld %d died\n", \
 		get_timestamp_diff(philo->ctx_simulation), philo->index);
-	unlock_mutex_all(philo->ctx_simulation);
 }
