@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 17:52:28 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 19:40:32 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_status	do_eat(t_philo_info *philo)
 	//食べ始めで死亡監視はじめ
 	init_monitoring(philo);
 	usleep_with_precision(philo->ctx_simulation, philo->ctx_simulation->time_to_eat);
-	//philo->is_lock_spork = false;//todo: なんでsporkだけ？
 	return (NOT_ENDED);
 }
 
@@ -66,19 +65,43 @@ static bool	check_each_eaten(t_philo_info *philo)
 //todo: ENDEDの時は返り先でunlock_mutex_all(philo->ctx_simulation)でもよいかも。
 static	void	unlock_spork_and_fork(t_philo_info *philo)
 {
-	unlock_mutex(&philo->spork, &philo->is_lock_spork);
-	unlock_mutex(&philo->fork, &philo->is_lock_fork);
+	t_simulation	*ctx_simulation;
+	int				i_spork;
+	int				i_fork;
+
+	ctx_simulation = philo->ctx_simulation;
+	i_fork = philo->fork;
+	i_spork = philo->spork;
+	unlock_mutex(\
+		&ctx_simulation->fork_list[i_fork], \
+		&ctx_simulation->is_lock_fork[i_fork]);
+	unlock_mutex(\
+		&ctx_simulation->fork_list[i_spork], \
+		&ctx_simulation->is_lock_fork[i_spork]);
 }
 
 t_status	do_fork_and_eat(t_philo_info *philo)
 {
-	lock_mutex(&philo->spork, &philo->is_lock_spork);
+	t_simulation	*ctx_simulation;
+	int				i_spork;
+	int				i_fork;
+
+	ctx_simulation = philo->ctx_simulation;
+	i_fork = philo->fork;
+	i_spork = philo->spork;
+	lock_mutex(\
+		&ctx_simulation->fork_list[i_spork], \
+		&ctx_simulation->is_lock_fork[i_spork]);
 	if (do_take_a_fork(philo) == ENDED)
 	{
-		unlock_mutex(&philo->spork, &philo->is_lock_spork);
+		unlock_mutex(\
+			&ctx_simulation->fork_list[i_spork], \
+			&ctx_simulation->is_lock_fork[i_spork]);
 		return (ENDED);
 	}
-	lock_mutex(&philo->fork, &philo->is_lock_fork);
+	lock_mutex(\
+		&ctx_simulation->fork_list[i_fork], \
+		&ctx_simulation->is_lock_fork[i_fork]);
 	if (do_take_a_fork(philo) == ENDED)
 	{
 		unlock_spork_and_fork(philo);

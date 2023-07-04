@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 18:24:22 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 19:26:58 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,29 @@ static void	*thread_func(void *arg)
 	return ((void *)philo);
 }
 
+static void	assign_fork(t_philo_info *philo_info, int i)
+{
+	int	num_philo;
+
+	num_philo = philo_info->ctx_simulation->number_of_philosophers;
+	if (i % 2 == 0)
+	{
+		if (i == num_philo - 1)
+			philo_info->spork = 0;
+		else
+			philo_info->spork = i + 1;
+		philo_info->fork = i;
+	}
+	else
+	{
+		if (i == num_philo - 1)
+			philo_info->fork = 0;
+		else
+			philo_info->fork = i + 1;
+		philo_info->spork = i;
+	}
+}
+
 //それぞれの哲学者init
 int	init_philo(t_simulation *ctx_simulation, int i)
 {
@@ -47,25 +70,7 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 	philo_info = ctx_simulation->philo_list[i];
 	philo_info->ctx_simulation = ctx_simulation;
 	philo_info->index = i + 1;
-	//fork割り当て
-	if (i % 2 == 0)
-	{
-		if (i == num_philo - 1)
-			philo_info->spork = ctx_simulation->fork_list[0];
-		else
-			philo_info->spork = ctx_simulation->fork_list[i + 1];
-		philo_info->fork = ctx_simulation->fork_list[i];
-	}
-	else
-	{
-		if (i == num_philo - 1)
-			philo_info->fork = ctx_simulation->fork_list[0];
-		else
-			philo_info->fork = ctx_simulation->fork_list[i + 1];
-		philo_info->spork = ctx_simulation->fork_list[i];
-	}
-	philo_info->is_lock_spork = false;
-	philo_info->is_lock_fork = false;
+	assign_fork(philo_info, i);
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
 	if (num_philo % 2 == 1 && i % 5 < 3)//todo: 奇数人の場合の調整
