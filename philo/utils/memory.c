@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:36:00 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 16:36:29 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 
 	printf("free_all_at_last\n");
 	i = 0;
+	//unlock_mutex_all(ctx_simulation);//todo: ここに入る前に終わらせておきたい（スレッド終了奴）
 	while (i < ctx_simulation->number_of_philosophers)
 	{
 		free_and_null((void *)&ctx_simulation->philo_list[i]);
@@ -25,7 +26,6 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 		free_and_null((void *)&ctx_simulation->folk_list[i]);
 		i++;
 	}
-	exit(1);
 }
 
 int	free_and_null(void **ptr)

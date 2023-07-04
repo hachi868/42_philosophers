@@ -119,6 +119,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 		ctx_simulation->philo_list[i]->thread = NULL;
 		i++;
 	}
+	printf("start_simulation end\n");
 	free_all_at_last(ctx_simulation);
 	return (0);
 }
