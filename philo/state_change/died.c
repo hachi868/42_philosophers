@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 02:56:11 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:01:50 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	long long		time_limit;
 
 	time_limit = ctx_simulation->time_to_die;
-	//printf("check_living %lld %lld\n", philo->time_last_eaten, time_limit);
 	usleep_with_precision(ctx_simulation, time_limit + 1);
-	//is_end mutex
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{
@@ -29,13 +27,11 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 		return ;
 	}
 	tm = get_timestamp_diff(ctx_simulation);
-	//printf("check_living tm:%lld - time_limit:%lld / %lld  > time_last_eaten %lld\n", tm, time_limit, tm - time_limit, philo->time_last_eaten);
-	//タイムリミットover is_end = true
 	if (tm - time_limit > philo->time_last_eaten)
 	{
 		ctx_simulation->is_end = true;
-		is_died(philo);
 		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		is_died(philo);
 		return ;
 	}
 	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
@@ -51,6 +47,13 @@ static void	*thread_monitoring(void *arg)
 	return (NULL);
 }
 
+static void	error_exit_monitering(t_philo_info *philo, pthread_t	*ptr, char *func, char *message)
+{
+	printf("Error: %s: %s\n", func, message);
+	free_and_null((void *)&ptr);
+	free_all_at_last(philo->ctx_simulation);
+}
+
 //死亡監視 init
 void	init_monitoring(t_philo_info *philo)
 {
@@ -59,19 +62,11 @@ void	init_monitoring(t_philo_info *philo)
 	monitoring = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\
 		monitoring, NULL, thread_monitoring, (void *)philo) != 0)
-	{
-		printf("Error!スレッド作れなかった init_monitoring\n");
-		free(monitoring);
-		monitoring = NULL;
-		return ;//error
-	}
+		error_exit_monitering(philo, monitoring, "init_monitoring",\
+		"Failed to create a new thread using pthread_create.");
 	if (pthread_detach(*monitoring) != 0)
-	{
-		printf("Error!スレッド待ち失敗");
-		free(monitoring);
-		monitoring = NULL;
-		return ;//error
-	}
+		error_exit_monitering(philo, monitoring, "init_monitoring",\
+			"Failed to detach the thread using pthread_detach.");
 	free_and_null((void *)&monitoring);
 }
 
