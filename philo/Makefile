@@ -30,7 +30,7 @@ SRCS =	main.c\
 OBJS := $(SRCS:.c=.o)
 
 $(PROG): $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 all: $(PROG)
 
