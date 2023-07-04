@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 14:06:09 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 17:42:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ typedef struct s_simulation
 	int				number_of_times_each_philosopher_must_eat;//食べたら止まる場合の回数
 	int				number_fill_eat;//食べきった哲学者の数
 	pthread_mutex_t *mutex_fill_eat; // number_fill_eatのためのmutex
+	bool			is_lock_fill_eat;//number_fill_eat lockしているか
 	bool			is_end;//終わりフラグ
 	pthread_mutex_t *mutex_is_end; // is_endのためのmutex
+	bool			is_lock_is_end;//mutex_is_end lockしているか
 }	t_simulation;
 
 struct s_philo_info
@@ -61,9 +63,9 @@ struct s_philo_info
 	int				index;//哲学者ナンバリング 1からスタート（奇数は左きき、偶数は右利き）
 	pthread_t		*thread;//哲学者はthreadである
 	pthread_mutex_t	*spork;//スポーク（奇数なら右、偶数なら左）
+	bool			is_lock_spork;//スポークを手にとっているか
 	pthread_mutex_t *folk; // フォーク（奇数なら左、偶数なら右）
-	bool			is_taken_spork;//スポークを手にとっているか
-	bool			is_taken_fork;//フォークを手にとっているか
+	bool			is_lock_fork;//フォークを手にとっているか
 	int				time_to_think;//食べるまでの思考時間
 	long long		time_last_eaten;//最後に食べた時間
 	int				count_eaten;// 食べた回数
@@ -106,4 +108,8 @@ int			free_and_null(void **ptr);
 // utils/print.c
 bool		check_end_and_print(t_philo_info *philo, t_action action);
 
+// utils/ft_mutex.c
+int			unlock_mutex_all(t_simulation *ctx_simulation);
+int			lock_mutex(pthread_mutex_t **mutex, bool *is_lock);
+int			unlock_mutex(pthread_mutex_t **mutex, bool *is_lock);
 #endif //PHILOSOPHERS_H

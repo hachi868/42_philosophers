@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:57:12 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 17:47:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,29 +31,32 @@ static char *get_message(t_action action)
 
 // ここで死ぬことはない。前の動作の結果、is_endになっていないかチェックしている。
 // 動作後に死ぬならtrueが返る。生きるならメッセージ表示してfalse
-bool check_end_and_print(t_philo_info *philo, t_action action)
+bool	check_end_and_print(\
+	t_philo_info *philo, t_action action)
 {
-	char *message;
-	long long timestamp;
+	char			*message;
+	long long		timestamp;
+	t_simulation	*ctx_simulation;
 
-	pthread_mutex_lock(philo->ctx_simulation->mutex_is_end);
-	if (philo->ctx_simulation->is_end == true)
+	ctx_simulation = philo->ctx_simulation;
+	lock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
+	if (ctx_simulation->is_end == true)
 	{
-		pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+		unlock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 		return (true);
 	}
 	message = get_message(action);
-	// todo: message = ""の場合？
 	if (action == EAT)
 	{
-		philo->time_last_eaten = get_timestamp_diff(philo->ctx_simulation);
+		philo->time_last_eaten = get_timestamp_diff(ctx_simulation);
 		timestamp = philo->time_last_eaten;
 	}
 	else
-	{
-		timestamp = get_timestamp_diff(philo->ctx_simulation);
-	}
+		timestamp = get_timestamp_diff(ctx_simulation);
 	printf("%lld %d %s\n", timestamp, philo->index, message);
-	pthread_mutex_unlock(philo->ctx_simulation->mutex_is_end);
+	unlock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 	return (false);
 }

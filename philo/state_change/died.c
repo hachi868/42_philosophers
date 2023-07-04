@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:53:15 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 17:53:46 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,25 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 
 	time_limit = ctx_simulation->time_to_die;
 	usleep_with_precision(ctx_simulation, time_limit + 1);
-	pthread_mutex_lock(ctx_simulation->mutex_is_end);
+	lock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 	if (ctx_simulation->is_end == true)
 	{
-		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		unlock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 		return ;
 	}
 	tm = get_timestamp_diff(ctx_simulation);
 	if (tm - time_limit > philo->time_last_eaten)
 	{
 		ctx_simulation->is_end = true;
-		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		unlock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 		is_died(philo);
 		return ;
 	}
-	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+	unlock_mutex(\
+			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 }
 
 //チェック関数
@@ -74,11 +78,7 @@ void	init_monitoring(t_philo_info *philo)
 //訃報
 void	is_died(t_philo_info *philo)
 {
-	if (philo->is_taken_spork == true)
-	{
-		pthread_mutex_unlock(philo->spork);
-		philo->is_taken_spork = false;
-	}
 	printf("%lld %d died\n", \
 		get_timestamp_diff(philo->ctx_simulation), philo->index);
+	unlock_mutex_all(philo->ctx_simulation);
 }

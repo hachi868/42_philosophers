@@ -24,7 +24,8 @@ SRCS =	main.c\
 		utils/get_time.c\
 		utils/ft_atoi_unsigned.c\
 		utils/check_error.c\
-		utils/print.c
+		utils/print.c\
+		utils/ft_mutex.c
 
 OBJS := $(SRCS:.c=.o)
 
