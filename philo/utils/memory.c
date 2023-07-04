@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 11:36:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:36:00 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 		free_and_null((void *)&ctx_simulation->folk_list[i]);
 		i++;
 	}
+	exit(1);
 }
 
 int	free_and_null(void **ptr)
