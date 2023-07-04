@@ -56,7 +56,7 @@ static void	error_exit_monitoring(\
 {
 	printf("Error: %s: %s\n", func, message);
 	free_and_null((void *)&ptr);
-	free_all_error(philo->ctx_simulation);
+	free_all_at_last(philo->ctx_simulation);
 }
 
 //死亡監視 init

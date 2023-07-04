@@ -88,7 +88,7 @@ static t_simulation	*init_simulation(int argc, int *args)
 	ctx_simulation->is_lock_fork = (bool *)malloc(\
 		sizeof(bool) * ctx_simulation->number_of_philosophers);
 	if (malloc_list_philo_fork(ctx_simulation) == 1)
-		free_all_error(ctx_simulation);
+		free_all_at_last(ctx_simulation);
 	ctx_simulation->time_to_die = args[1];
 	ctx_simulation->time_to_eat = args[2];
 	ctx_simulation->time_to_sleep = args[3];
@@ -96,9 +96,9 @@ static t_simulation	*init_simulation(int argc, int *args)
 	ctx_simulation->mutex_is_end = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (ctx_simulation->mutex_is_end == NULL)
-		free_all_error(ctx_simulation);
+		free_all_at_last(ctx_simulation);
 	if (pthread_mutex_init(ctx_simulation->mutex_is_end, NULL) != 0)
-		free_all_error(ctx_simulation);
+		free_all_at_last(ctx_simulation);
 	free_args(argc, &args);
 	return (ctx_simulation);
 }

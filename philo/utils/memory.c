@@ -6,25 +6,11 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:07:56 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:23:36 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
-
-void	free_all_error(t_simulation *ctx_simulation)
-{
-	int	i;
-
-	printf("free_all_error\n");
-	i = 0;
-	while (i < ctx_simulation->number_of_philosophers)
-	{
-		free_and_null((void *)&ctx_simulation->philo_list[i]);
-		free_and_null((void *)&ctx_simulation->fork_list[i]);
-		i++;
-	}
-}
 
 static void	free_ctx_simulation(t_simulation *ctx_simulation)
 {

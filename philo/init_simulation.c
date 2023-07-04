@@ -81,7 +81,7 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 	{
 		printf("Error: init_philo: "
 			"Failed to create a new thread using pthread_create.\n");
-		free_all_error(ctx_simulation);
+		free_all_at_last(ctx_simulation);
 		return (1);
 	}
 	init_monitoring(philo_info);
@@ -99,7 +99,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 	{
 		if (pthread_mutex_init(ctx_simulation->fork_list[i], NULL) != 0)
 		{
-			free_all_error(ctx_simulation);
+			free_all_at_last(ctx_simulation);
 			return (1);
 		}
 		i++;
@@ -118,7 +118,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 		{
 			printf("Error: start_simulation: "
 				"Failed to create a new thread using pthread_join.\n");
-			free_all_error(ctx_simulation);
+			free_all_at_last(ctx_simulation);
 			return (1);
 		}
 		i++;
