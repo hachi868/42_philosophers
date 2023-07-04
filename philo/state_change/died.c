@@ -72,8 +72,7 @@ void	init_monitoring(t_philo_info *philo)
 		monitoring = NULL;
 		return ;//error
 	}
-	free(monitoring);
-	monitoring = NULL;
+	free_and_null((void *)&monitoring);
 }
 
 //訃報

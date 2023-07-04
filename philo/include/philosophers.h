@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 02:45:54 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 11:36:17 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,7 @@ void		usleep_with_precision(t_simulation *ctx_simulation, long long sec_limit);
 
 // utils/memory.c
 void		free_all_at_last(t_simulation *ctx_simulation);
-int			free_and_null(t_philo_info **ptr);
-int			free_and_null2(pthread_mutex_t **ptr);
+int			free_and_null(void **ptr);
 
 // utils/print.c
 bool		check_end_and_print(t_philo_info *philo, t_action action);
