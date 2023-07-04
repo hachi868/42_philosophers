@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 19:08:26 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 19:44:59 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,7 @@ struct s_philo_info
 	int				index;//哲学者ナンバリング 1からスタート（奇数は左きき、偶数は右利き）
 	pthread_t		*thread;//哲学者はthreadである
 	int				spork;//スポーク index（奇数なら右、偶数なら左）
-//	pthread_mutex_t	*spork;//スポーク（奇数なら右、偶数なら左）
-//	bool			is_lock_spork;//スポークを手にとっているか
 	int				fork;//フォーク index（奇数なら左、偶数なら右）
-//	pthread_mutex_t *fork; // フォーク（奇数なら左、偶数なら右）
-//	bool			is_lock_fork;//フォークを手にとっているか
 	int				time_to_think;//食べるまでの思考時間
 	long long		time_last_eaten;//最後に食べた時間
 	int				count_eaten;// 食べた回数
