@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 17:53:46 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 18:25:36 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static void	error_exit_monitoring(\
 {
 	printf("Error: %s: %s\n", func, message);
 	free_and_null((void *)&ptr);
-	free_all_at_last(philo->ctx_simulation);
+	free_all_error(philo->ctx_simulation);
 }
 
 //死亡監視 init

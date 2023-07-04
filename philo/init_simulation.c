@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 16:25:12 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 18:24:22 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 		philo_info->thread, NULL, thread_func, (void *)philo_info) != 0)
 	{
 		printf("Error: init_philo: Failed to create a new thread using pthread_create.\n");
-		//todo:free
+		free_all_error(ctx_simulation);
 		return (1);
 	}
 	init_monitoring(philo_info);
@@ -89,13 +89,13 @@ int	start_simulation(t_simulation *ctx_simulation)
 	int	num_threads;
 	int	i;
 
-	num_threads = ctx_simulation->number_of_philosophers;//哲学者の数 = フォークの数
+	num_threads = ctx_simulation->number_of_philosophers;
 	i = 0;
 	while (i < num_threads)
 	{
 		if (pthread_mutex_init(ctx_simulation->fork_list[i], NULL) != 0)
 		{
-			//todo:free
+			free_all_error(ctx_simulation);
 			return (1);
 		}
 		i++;
@@ -113,7 +113,7 @@ int	start_simulation(t_simulation *ctx_simulation)
 		if (pthread_join(*ctx_simulation->philo_list[i]->thread, NULL) != 0)
 		{
 			printf("Error: start_simulation: Failed to create a new thread using pthread_join.\n");
-			//todo:free
+			free_all_error(ctx_simulation);
 			return (1);
 		}
 		ctx_simulation->philo_list[i]->thread = NULL;

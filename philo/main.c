@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:52:29 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 18:23:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ static t_simulation	*init_simulation(int argc, int *args)
 
 	ctx_simulation = (t_simulation *)malloc(sizeof(t_simulation));
 	if (activate_each_must_eat(ctx_simulation, argc, args) == 1)
-		free_all_at_last(ctx_simulation);//todo: freeしないといけないものが限定的
+		free_all_error(ctx_simulation);
 	ctx_simulation->number_of_philosophers = args[0];
 	ctx_simulation->philo_list = (t_philo_info **)malloc(\
 		sizeof(t_philo_info *) * ctx_simulation->number_of_philosophers);
 	ctx_simulation->fork_list = (pthread_mutex_t **)malloc(\
 		sizeof(pthread_mutex_t *) * ctx_simulation->number_of_philosophers);
 	if (malloc_list_philo_fork(ctx_simulation) == 1)
-		free_all_at_last(ctx_simulation);//todo: freeしないといけないものが限定的
+		free_all_error(ctx_simulation);
 	ctx_simulation->time_to_die = args[1];
 	ctx_simulation->time_to_eat = args[2];
 	ctx_simulation->time_to_sleep = args[3];
@@ -89,9 +89,9 @@ static t_simulation	*init_simulation(int argc, int *args)
 	ctx_simulation->mutex_is_end = \
 		(pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (ctx_simulation->mutex_is_end == NULL)
-		free_all_at_last(ctx_simulation);
+		free_all_error(ctx_simulation);
 	if (pthread_mutex_init(ctx_simulation->mutex_is_end, NULL) != 0)
-		free_all_at_last(ctx_simulation);
+		free_all_error(ctx_simulation);
 	free_args(argc, &args);
 	return (ctx_simulation);
 }
