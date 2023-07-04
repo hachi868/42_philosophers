@@ -16,8 +16,8 @@ static t_status	do_take_a_fork(t_philo_info *philo)
 {
 	if (check_end_and_print(philo, TAKE_A_FORK))
 		return (ENDED);
-	if (philo->is_take_spork == false)
-		philo->is_take_spork = true;
+	if (philo->is_taken_spork == false)
+		philo->is_taken_spork = true;
 	return (NOT_ENDED);
 }
 
@@ -28,7 +28,7 @@ static t_status	do_eat(t_philo_info *philo)
 	//食べ始めで死亡監視はじめ
 	init_monitoring(philo);
 	usleep_with_precision(philo->ctx_simulation, philo->ctx_simulation->time_to_eat);
-	philo->is_take_spork = false;
+	philo->is_taken_spork = false;
 	return (NOT_ENDED);
 }
 

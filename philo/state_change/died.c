@@ -74,10 +74,10 @@ void	init_monitoring(t_philo_info *philo)
 //訃報
 void	is_died(t_philo_info *philo)
 {
-	if (philo->is_take_spork == true)
+	if (philo->is_taken_spork == true)
 	{
 		pthread_mutex_unlock(philo->spork);
-		philo->is_take_spork = false;
+		philo->is_taken_spork = false;
 	}
 	printf("%lld %d died\n", \
 		get_timestamp_diff(philo->ctx_simulation), philo->index);
