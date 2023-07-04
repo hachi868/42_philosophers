@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 12:01:50 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 12:18:33 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ static void	*thread_monitoring(void *arg)
 	return (NULL);
 }
 
-static void	error_exit_monitering(t_philo_info *philo, pthread_t	*ptr, char *func, char *message)
+static void	error_exit_monitoring(\
+	t_philo_info *philo, pthread_t	*ptr, char *func, char *message)
 {
 	printf("Error: %s: %s\n", func, message);
 	free_and_null((void *)&ptr);
@@ -62,10 +63,10 @@ void	init_monitoring(t_philo_info *philo)
 	monitoring = (pthread_t *)malloc(sizeof(pthread_t));
 	if (pthread_create(\
 		monitoring, NULL, thread_monitoring, (void *)philo) != 0)
-		error_exit_monitering(philo, monitoring, "init_monitoring",\
+		error_exit_monitoring(philo, monitoring, "init_monitoring",\
 		"Failed to create a new thread using pthread_create.");
 	if (pthread_detach(*monitoring) != 0)
-		error_exit_monitering(philo, monitoring, "init_monitoring",\
+		error_exit_monitoring(philo, monitoring, "init_monitoring",\
 			"Failed to detach the thread using pthread_detach.");
 	free_and_null((void *)&monitoring);
 }
