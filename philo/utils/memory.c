@@ -36,11 +36,11 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 	while (i < ctx_simulation->number_of_philosophers)
 	{
 		free_and_null((void *)&ctx_simulation->fork_list[i]);
-		free_and_null((void *)&ctx_simulation->is_lock_fork[i]);
 		free_and_null((void *)&ctx_simulation->philo_list[i]->thread);
 		free_and_null((void *)&ctx_simulation->philo_list[i]);
 		i++;
 	}
+	free_and_null((void *)&ctx_simulation->is_lock_fork);
 	free_and_null((void *)&ctx_simulation->philo_list);
 	free_and_null((void *)&ctx_simulation->fork_list);
 	free_and_null((void *)&ctx_simulation->mutex_is_end);
@@ -52,6 +52,8 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 
 int	free_and_null(void **ptr)
 {
+	if (*ptr == NULL)
+		return (0);
 	//printf("free_and_null:1; %p %p\n", ptr, *ptr);
 	free(*ptr);
 	*ptr = NULL;
