@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 22:57:40 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:15:32 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static void	*thread_func(void *arg)
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
-	if (philo->ctx_simulation->number_of_philosophers % 2 == 1)//奇数なら調整いれる
+	if (philo->ctx_simulation->number_of_philosophers % 2 == 1) //todo: 奇数なら調整いれる
 	{
 		if (philo->index == 1)
 			usleep(200);
 		else if (philo->index % 2 == 0)
 			usleep(100);
 	}
-	// 順に実行
 	while (1)
 	{
 		if (do_fork_and_eat(philo) == ENDED)
@@ -60,7 +59,6 @@ static void	assign_fork(t_philo_info *philo_info, int i)
 	}
 }
 
-//それぞれの哲学者init
 int	init_philo(t_simulation *ctx_simulation, int i)
 {
 	t_philo_info	*philo_info;
@@ -73,7 +71,7 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 	assign_fork(philo_info, i);
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
-	if (num_philo % 2 == 1 && i % 5 < 3)//todo: 奇数人の場合の調整
+	if (num_philo % 2 == 1 && i % 5 < 3) //todo: 奇数人の場合の調整
 		philo_info->time_to_think = ctx_simulation->time_to_eat;
 	else
 		philo_info->time_to_think = 0;
@@ -81,7 +79,8 @@ int	init_philo(t_simulation *ctx_simulation, int i)
 	if (pthread_create(\
 		philo_info->thread, NULL, thread_func, (void *)philo_info) != 0)
 	{
-		printf("Error: init_philo: Failed to create a new thread using pthread_create.\n");
+		printf("Error: init_philo: "
+			"Failed to create a new thread using pthread_create.\n");
 		free_all_error(ctx_simulation);
 		return (1);
 	}

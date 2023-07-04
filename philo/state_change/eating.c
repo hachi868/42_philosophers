@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 22:37:09 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:13:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_status	do_eat(t_philo_info *philo)
 {
 	if (check_end_and_print(philo, EAT))
 		return (ENDED);
-	//食べ始めで死亡監視はじめ
 	init_monitoring(philo);
-	usleep_with_precision(philo->ctx_simulation, philo->ctx_simulation->time_to_eat);
+	usleep_with_precision(\
+		philo->ctx_simulation, philo->ctx_simulation->time_to_eat);
 	return (NOT_ENDED);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 21:26:21 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:10:34 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,17 @@ static t_simulation	*init_simulation(int argc, int *args)
 
 	ctx_simulation = (t_simulation *)malloc(sizeof(t_simulation));
 	if (activate_each_must_eat(ctx_simulation, argc, args) == 1)
-		free_all_error(ctx_simulation);
+	{
+		free_args(argc, &args);
+		free_and_null((void *)&ctx_simulation->is_lock_fork);
+		free_and_null((void *)&ctx_simulation->philo_list);
+		free_and_null((void *)&ctx_simulation->fork_list);
+		free_and_null((void *)&ctx_simulation->mutex_is_end);
+		if (ctx_simulation->number_of_times_each_philosopher_must_eat > 0)
+			free_and_null((void *)&ctx_simulation->mutex_fill_eat);
+		free_and_null((void *)&ctx_simulation);
+		return (NULL);
+	}
 	ctx_simulation->number_of_philosophers = args[0];
 	ctx_simulation->philo_list = (t_philo_info **)malloc(\
 		sizeof(t_philo_info *) * ctx_simulation->number_of_philosophers);
@@ -100,11 +110,12 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
-		// 引数チェック
 		args = (int *)malloc(sizeof(int) * argc);
 		if (is_invalid_args(argc, argv, args) == false)
-			return (1); // todo:end,show_error?
-		// OKならシミュレーション開始
+		{
+			printf("Error: is_invalid_args\n");
+			return (1);
+		}
 		ctx_simulation = init_simulation(argc, args);
 		if (ctx_simulation == NULL)
 			return (1);

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 19:44:59 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 00:45:03 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,33 @@ typedef struct s_philo_info	t_philo_info;
 
 typedef struct s_simulation
 {
-	int number_of_philosophers;	 // 哲学者人数
-	t_philo_info	**philo_list;//哲学者全員
-	pthread_mutex_t **fork_list; // フォークのmutex list
-	bool			*is_lock_fork;//フォークのmutex lockしているか
-	int				time_to_die;//死ぬまでのリミット
-	int				time_to_eat;//食事時間
-	int				time_to_sleep;//睡眠時間
-	long long		time_start;//開始時間(０リセット基準)
-	int				number_of_times_each_philosopher_must_eat;//食べたら止まる場合の回数
-	int				number_fill_eat;//食べきった哲学者の数
-	pthread_mutex_t *mutex_fill_eat; // number_fill_eatのためのmutex
-	bool			is_lock_fill_eat;//number_fill_eat lockしているか
-	bool			is_end;//終わりフラグ
-	pthread_mutex_t *mutex_is_end; // is_endのためのmutex
-	bool			is_lock_is_end;//mutex_is_end lockしているか
+	int				number_of_philosophers;
+	t_philo_info	**philo_list;
+	pthread_mutex_t	**fork_list;
+	bool			*is_lock_fork;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	long long		time_start;
+	int				number_of_times_each_philosopher_must_eat;
+	int				number_fill_eat;
+	pthread_mutex_t	*mutex_fill_eat;
+	bool			is_lock_fill_eat;
+	bool			is_end;
+	pthread_mutex_t	*mutex_is_end;
+	bool			is_lock_is_end;
 }	t_simulation;
 
 struct s_philo_info
 {
-	t_simulation	*ctx_simulation;//全部入り
-	int				index;//哲学者ナンバリング 1からスタート（奇数は左きき、偶数は右利き）
-	pthread_t		*thread;//哲学者はthreadである
-	int				spork;//スポーク index（奇数なら右、偶数なら左）
-	int				fork;//フォーク index（奇数なら左、偶数なら右）
-	int				time_to_think;//食べるまでの思考時間
-	long long		time_last_eaten;//最後に食べた時間
-	int				count_eaten;// 食べた回数
+	t_simulation	*ctx_simulation;
+	int				index;
+	pthread_t		*thread;
+	int				spork;
+	int				fork;
+	int				time_to_think;
+	long long		time_last_eaten;
+	int				count_eaten;
 };
 
 // init_simulation.c
@@ -98,12 +98,13 @@ bool		is_invalid_args(int argc, char **argv, int *args);
 // utils/get_time.c
 long long	get_timestamp(void);
 long long	get_timestamp_diff(t_simulation *ctx_simulation);
-void		usleep_with_precision(t_simulation *ctx_simulation, long long sec_limit);
+void		usleep_with_precision(\
+	t_simulation *ctx_simulation, long long sec_limit);
 
 // utils/memory.c
 void		free_all_error(t_simulation *ctx_simulation);
 void		free_all_at_last(t_simulation *ctx_simulation);
-int			free_and_null(void **ptr);
+void		free_and_null(void **ptr);
 
 // utils/print.c
 bool		check_end_and_print(t_philo_info *philo, t_action action);

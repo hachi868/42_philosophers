@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 14:12:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 22:47:01 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:11:51 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	unlock_mutex_all(t_simulation *ctx_simulation)
 int	lock_mutex(pthread_mutex_t **mutex, bool *is_lock)
 {
 	pthread_mutex_lock(*mutex);
-	//todo: lockされていた場合
 	if (*is_lock == false)
 		*is_lock = true;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:52:01 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 22:35:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:12:37 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,49 +47,3 @@ int	ft_atoi_unsigned(const char *str_num)
 		return (-1);
 	return ((int)num);
 }
-//
-//int	main(void)
-//{
-//	printf("%s => %d:%d\n", "1", atoi("1"), ft_atoi_unsigned("1"));
-//	printf("%s => %d:%d\n", "a1", atoi("a1"), ft_atoi_unsigned("a1"));
-//	printf("%s => %d:%d\n", "--1", atoi("--1"), ft_atoi_unsigned("--1"));
-//	printf("%s => %d:%d\n", "++1", atoi("++1"), ft_atoi_unsigned("++1"));
-//	printf("%s => %d:%d\n", "+1", atoi("+1"), ft_atoi_unsigned("+1"));
-//	printf("%s => %d:%d\n", "-1", atoi("-1"), ft_atoi_unsigned("-1"));
-//	printf("%s => %d:%d\n", "+0", atoi("+0"), ft_atoi_unsigned("+0"));
-//	printf("%s => %d:%d\n", "-0", atoi("-0"), ft_atoi_unsigned("-0"));
-//	printf("%s => %d:%d\n", "+", atoi("+"), ft_atoi_unsigned("+"));
-//	printf("%s => %d:%d\n", "-", atoi("-"), ft_atoi_unsigned("-"));
-//	printf("%s => %d:%d\n", "+42lyon", atoi("+42lyon"), ft_atoi_unsigned("+42lyon"));
-//	printf("%s => %d:%d\n", "+101", atoi("+101"), ft_atoi_unsigned("+101"));
-//  printf("%s => %d:%d\n",
-//         "2147483647", atoi("2147483647"), ft_atoi_unsigned("2147483647"));
-//  printf("%s => %d:%d\n",
-//         "2147483648", atoi("2147483648"), ft_atoi_unsigned("2147483648"));
-//	printf("%s => %d:%d\n",
-//				 "-2147483648", atoi("-2147483648"), ft_atoi_unsigned("-2147483648"));
-//	printf("%s => %d:%d\n", "-+42", atoi("-+42"), ft_atoi_unsigned("-+42"));
-//	printf("%s => %d:%d\n", "+-42", atoi("+-42"), ft_atoi_unsigned("+-42"));
-//	printf("%s => %d:%d\n", "+42", atoi("+42"), ft_atoi_unsigned("+42"));
-//	printf("%s => %d:%d\n", "- 42", atoi("- 42"), ft_atoi_unsigned("- 42"));
-//	printf("%s => %d:%d\n", "1 42", atoi("1 42"), ft_atoi_unsigned("1 42"));
-//	printf("%s => %d:%d\n", "-1 42", atoi("-1 42"), ft_atoi_unsigned("-1 42"));
-//	printf("%s => %d:%d\n", "-123",	atoi("-123"),	ft_atoi_unsigned("-123"));
-//	printf("%s => %d:%d\n", "--123",	atoi("--123"),	ft_atoi_unsigned("--123"));
-//	printf("%s => %d:%d\n", "   123",	atoi("   123"),	ft_atoi_unsigned("   123"));
-//	printf("%s => %d:%d\n", "   123-",	atoi("   123-"),	ft_atoi_unsigned("   123-"));
-//	printf("%s => %d:%d\n", "12 3-",	atoi("   12 3-"),	ft_atoi_unsigned("   12 3-"));
-//	printf("%s => %d:%d\n", "++123",	atoi("  ++123"),	ft_atoi_unsigned("  ++123"));
-//	printf("%s => %d:%d\n", "-6.4c",	atoi("-6.4c"),	ft_atoi_unsigned("-6.4c"));
-//	printf("%s => %d:%d\n", "+6.4c",	atoi("+6.4c"),	ft_atoi_unsigned("+6.4c"));
-//	printf("%s => %d:%d\n", "-A",	atoi("-A"),	ft_atoi_unsigned("-A"));
-//	printf("%s => %d:%d\n",
-//		   "-2147483648576298", atoi("-2147483648576298"), ft_atoi_unsigned("-2147483648576298"));
-//	printf("%s => %d:%d\n",
-//		   "2147483648576298", atoi("2147483648576298"), ft_atoi_unsigned("2147483648576298"));
-//	printf("%s => %d:%d\n",
-//		   "               3648", atoi("               3648"), ft_atoi_unsigned("               3648"));
-//	printf("%s => %d:%d\n",
-//		   "               2147483648576298", atoi("               2147483648576298"), ft_atoi_unsigned("               2147483648576298"));
-//	return (0);
-//}

@@ -6,13 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 17:47:37 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:12:53 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-static char *get_message(t_action action)
+static char	*get_message(t_action action)
 {
 	char	*message;
 
