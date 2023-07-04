@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 19:40:32 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 21:26:25 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static bool	check_each_eaten(t_philo_info *philo)
 			unlock_mutex(\
 			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 			printf("Simulation stops: "
-				"All philosophers have eaten at least %d times\n", \
+				"All philosophers have eaten at least %d times.\n", \
 				ctx_simulation->number_of_times_each_philosopher_must_eat);
 			//free_all_at_last(philo->ctx_simulation);//todo:セグフォ
 			return (true);

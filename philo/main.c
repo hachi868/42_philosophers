@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 19:30:50 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/04 21:26:21 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	activate_each_must_eat(\
 		if (args[4] == 0)
 		{
 			printf("Simulation stops:"
-				"All philosophers have eaten at least 0 times\n");
+				"All philosophers have eaten at least 0 times.\n");
 			return (1);
 		}
 		ctx_simulation->number_of_times_each_philosopher_must_eat = args[4];
