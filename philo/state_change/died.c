@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:45:13 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 02:28:18 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,4 @@ void	init_monitoring(t_philo_info *philo)
 		error_exit_monitoring(philo, monitoring, "init_monitoring", \
 			"Failed to detach the thread using pthread_detach.");
 	free_and_null((void *)&monitoring);
-}
-
-//訃報
-void	is_died(t_philo_info *philo)
-{
-	printf("%lld %d died\n", \
-		get_timestamp_diff(philo->ctx_simulation), philo->index);
 }

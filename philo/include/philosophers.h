@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 02:11:33 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 02:15:13 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_status	do_think(t_philo_info *philo);
 // state_change/died.c
 void		check_living(t_simulation *ctx_simulation, t_philo_info *philo);
 void		init_monitoring(t_philo_info *philo);
-void		is_died(t_philo_info *philo);
 
 // utils/ft_atoi_unsigned.c
 int			free_args(int argc, int *args);
