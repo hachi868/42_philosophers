@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 02:28:18 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 03:14:47 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,10 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	tm = get_timestamp_diff(ctx_simulation);
 	if (tm - time_limit > philo->time_last_eaten)
 	{
-		ctx_simulation->is_end = true;
-		unlock_mutex(\
-			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 		printf("%lld %d died\n", \
 			get_timestamp_diff(philo->ctx_simulation), philo->index);
+		ctx_simulation->is_end = true;
+		unlock_mutex_all(philo->ctx_simulation);
 		return ;
 	}
 	unlock_mutex(\
