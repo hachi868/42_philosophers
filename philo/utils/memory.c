@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 10:12:52 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 02:11:28 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 	{
 		free_and_null((void *)&ctx_simulation->fork_list[i]);
 		free_and_null((void *)&ctx_simulation->philo_list[i]->thread);
-		free_and_null((void *)&ctx_simulation->philo_list[i]->monitoring);
 		free_and_null((void *)&ctx_simulation->philo_list[i]);
 		i++;
 	}

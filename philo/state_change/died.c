@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 02:03:47 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 01:45:13 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,11 @@ static void	error_exit_monitoring(\
 }
 
 //死亡監視 init
-pthread_t	*init_monitoring(t_philo_info *philo)
+void	init_monitoring(t_philo_info *philo)
 {
 	pthread_t	*monitoring;
 
 	monitoring = (pthread_t *)malloc(sizeof(pthread_t));
-	printf("monitoring: %p\n", monitoring);
 	if (pthread_create(\
 		monitoring, NULL, thread_monitoring, (void *)philo) != 0)
 		error_exit_monitoring(philo, monitoring, "init_monitoring", \
@@ -74,10 +73,7 @@ pthread_t	*init_monitoring(t_philo_info *philo)
 	if (pthread_detach(*monitoring) != 0)
 		error_exit_monitoring(philo, monitoring, "init_monitoring", \
 			"Failed to detach the thread using pthread_detach.");
-	printf("monitoring:free: %p\n", monitoring);
 	free_and_null((void *)&monitoring);
-	printf("monitoring:free:after %p\n", monitoring);
-	return (monitoring);
 }
 
 //訃報
