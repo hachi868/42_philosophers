@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 02:11:28 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 03:06:12 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 
 	printf("free_all_at_last\n");
 	i = 0;
+	usleep(ctx_simulation->time_to_die * 1000);
 	while (i < ctx_simulation->number_of_philosophers)
 	{
 		free_and_null((void *)&ctx_simulation->fork_list[i]);
