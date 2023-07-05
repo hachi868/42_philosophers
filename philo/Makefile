@@ -16,7 +16,9 @@ CFLAGS := -Wall -Wextra -Werror
 LDFLAGS = -lpthread
 SRCS =	main.c\
 		init_simulation.c\
-		state_change/eating.c\
+		init_philo.c\
+		state_change/eating01.c\
+		state_change/eating02.c\
 		state_change/sleeping.c\
 		state_change/thinking.c\
 		state_change/died.c\

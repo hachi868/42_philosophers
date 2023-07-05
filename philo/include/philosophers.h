@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 02:15:13 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 03:57:55 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <string.h>
 # include <pthread.h>
 # include <sys/time.h>
+
+# define UNLOCK 0
+# define LOCK 1
 
 typedef enum s_status
 {
@@ -71,11 +74,20 @@ struct s_philo_info
 };
 
 // init_simulation.c
-int			init_philo(t_simulation *ctx_simulation, int i);
 int			start_simulation(t_simulation *ctx_simulation);
 
-// state_change/eating.c
+// init_philo.c
+int			init_philo(t_simulation *ctx_simulation, int i);
+
+// state_change/eating01.c
 t_status	do_fork_and_eat(t_philo_info *philo);
+
+// state_change/eating02.c
+t_status	do_take_a_fork(t_philo_info *philo);
+t_status	do_eat(t_philo_info *philo);
+void		is_fill_eat(\
+	t_simulation *ctx_simulation, t_philo_info *philo);
+bool		check_each_eaten(t_philo_info *philo);
 
 // state_change/sleeping.c
 t_status	do_sleep(t_philo_info *philo);
