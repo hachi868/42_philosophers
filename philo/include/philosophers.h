@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 10:13:09 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 01:12:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ pthread_t	*init_monitoring(t_philo_info *philo);
 void		is_died(t_philo_info *philo);
 
 // utils/ft_atoi_unsigned.c
-int			free_args(int argc, int **ptr);
+int			free_args(int argc, int *args);
 int			ft_atoi_unsigned(const char *str_num);
 
 // utils/check_error.c

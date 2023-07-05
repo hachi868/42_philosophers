@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 10:17:31 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 01:13:55 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ static t_simulation	*init_simulation(int argc, int *args)
 	ctx_simulation = (t_simulation *)malloc(sizeof(t_simulation));
 	if (activate_each_must_eat(ctx_simulation, argc, args) == 1)
 	{
-		free_args(argc, &args);
+		free_args(argc, args);
 		free_ctx_simulation(ctx_simulation);
 		return (NULL);
 	}
 	init_simulation_member(ctx_simulation, args);
-	free_args(argc, &args);
+	free_args(argc, args);
 	return (ctx_simulation);
 }
 
