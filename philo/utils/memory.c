@@ -6,13 +6,13 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 02:06:05 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/05 10:12:52 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-static void	free_ctx_simulation(t_simulation *ctx_simulation)
+void	free_ctx_simulation(t_simulation *ctx_simulation)
 {
 	free_and_null((void *)&ctx_simulation->is_lock_fork);
 	free_and_null((void *)&ctx_simulation->philo_list);
