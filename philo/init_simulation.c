@@ -6,18 +6,16 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:27:40 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:31:48 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 10:57:59 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/philosophers.h"
 
-int	start_simulation(t_simulation *ctx_simulation)
+static int	init_fork_mutex_list(t_simulation *ctx_simulation, int num_threads)
 {
-	int	num_threads;
 	int	i;
 
-	num_threads = ctx_simulation->number_of_philosophers;
 	i = 0;
 	while (i < num_threads)
 	{
@@ -28,13 +26,26 @@ int	start_simulation(t_simulation *ctx_simulation)
 		}
 		i++;
 	}
-	ctx_simulation->time_start = get_timestamp();
+	return (0);
+}
+
+static int	init_philo_list(t_simulation *ctx_simulation, int num_threads)
+{
+	int	i;
+
 	i = 0;
 	while (i < num_threads)
 	{
 		init_philo(ctx_simulation, i);
 		i++;
 	}
+	return (0);
+}
+
+static int	join_philo_list(t_simulation *ctx_simulation, int num_threads)
+{
+	int	i;
+
 	i = 0;
 	while (i < num_threads)
 	{
@@ -47,6 +58,18 @@ int	start_simulation(t_simulation *ctx_simulation)
 		}
 		i++;
 	}
+	return (0);
+}
+
+int	start_simulation(t_simulation *ctx_simulation)
+{
+	int	num_threads;
+
+	num_threads = ctx_simulation->number_of_philosophers;
+	init_fork_mutex_list(ctx_simulation, num_threads);
+	ctx_simulation->time_start = get_timestamp();
+	init_philo_list(ctx_simulation, num_threads);
+	join_philo_list(ctx_simulation, num_threads);
 	free_all_at_last(ctx_simulation);
 	return (0);
 }
