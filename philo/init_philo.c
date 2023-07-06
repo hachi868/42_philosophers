@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:29:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:30:18 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 12:04:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,10 @@ static void	*thread_func(void *arg)
 	t_philo_info	*philo;
 
 	philo = (t_philo_info *)arg;
-	//todo: 奇数なら調整いれる
-	if (philo->ctx_simulation->number_of_philosophers % 2 == 1)
-	{
-		if (philo->index == 1)
-			usleep(200);
-		else if (philo->index % 2 == 0)
-			usleep(100);
-	}
+	if (philo->index % 2 == 0)
+		usleep(5);
+	if (philo->index == philo->ctx_simulation->number_of_philosophers)
+		usleep(philo->ctx_simulation->time_to_eat);
 	while (1)
 	{
 		if (do_fork_and_eat(philo) == ENDED)
@@ -64,16 +60,14 @@ static int	init_philo_info(\
 	t_philo_info *philo_info, int num_philo, \
 	t_simulation *ctx_simulation, int i)
 {
+	(void)num_philo;
 	philo_info->ctx_simulation = ctx_simulation;
 	philo_info->index = i + 1;
 	assign_fork(philo_info, i);
 	philo_info->time_last_eaten = 0;
 	philo_info->count_eaten = 0;
-	//todo: 奇数人の場合の調整
-	if (num_philo % 2 == 1 && i % 5 < 3)
-		philo_info->time_to_think = ctx_simulation->time_to_eat;
-	else
-		philo_info->time_to_think = 0;
+	if (num_philo % 2 == 1)
+		philo_info->time_to_think = 5;
 	return (0);
 }
 
