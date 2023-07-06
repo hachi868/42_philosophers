@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:20:48 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:43:48 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	free_ctx_simulation(t_simulation *ctx_simulation)
 {
-	free_and_null((void *)&ctx_simulation->is_lock_fork);
 	free_and_null((void *)&ctx_simulation->philo_list);
 	free_and_null((void *)&ctx_simulation->fork_list);
 	free_and_null((void *)&ctx_simulation->mutex_is_end);

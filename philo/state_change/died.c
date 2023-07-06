@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:20:46 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:41:28 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,10 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 
 	time_limit = ctx_simulation->time_to_die;
 	usleep_with_precision(ctx_simulation, time_limit + 1);
-	lock_mutex(\
-			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
+	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{
-		unlock_mutex(\
-			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
+		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 		return ;
 	}
 	tm = get_timestamp_diff(ctx_simulation);
@@ -36,8 +34,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 		unlock_mutex_all(philo->ctx_simulation);
 		return ;
 	}
-	unlock_mutex(\
-			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
+	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
 }
 
 static void	*thread_monitoring(void *arg)

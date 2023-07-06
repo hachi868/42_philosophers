@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:53:49 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:55:31 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:41:15 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,9 @@ static void	lock_unlock_spork(t_philo_info *philo, bool is_lock)
 	ctx_simulation = philo->ctx_simulation;
 	i_spork = philo->spork;
 	if (is_lock == LOCK)
-	{
-		lock_mutex(\
-		&ctx_simulation->fork_list[i_spork], \
-		&ctx_simulation->is_lock_fork[i_spork]);
-	}
+		pthread_mutex_lock(ctx_simulation->fork_list[i_spork]);
 	else
-	{
-		unlock_mutex(\
-		&ctx_simulation->fork_list[i_spork], \
-		&ctx_simulation->is_lock_fork[i_spork]);
-	}
+		pthread_mutex_unlock(ctx_simulation->fork_list[i_spork]);
 }
 
 static void	lock_unlock_fork(t_philo_info *philo, bool is_lock)
@@ -41,17 +33,9 @@ static void	lock_unlock_fork(t_philo_info *philo, bool is_lock)
 	ctx_simulation = philo->ctx_simulation;
 	i_fork = philo->fork;
 	if (is_lock == LOCK)
-	{
-		lock_mutex(\
-		&ctx_simulation->fork_list[i_fork], \
-		&ctx_simulation->is_lock_fork[i_fork]);
-	}
+		pthread_mutex_lock(ctx_simulation->fork_list[i_fork]);
 	else
-	{
-		unlock_mutex(\
-		&ctx_simulation->fork_list[i_fork], \
-		&ctx_simulation->is_lock_fork[i_fork]);
-	}
+		pthread_mutex_unlock(ctx_simulation->fork_list[i_fork]);
 }
 
 static void	unlock_spork_and_fork(t_philo_info *philo)
