@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:57:55 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:44:03 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_simulation
 	int				number_of_philosophers;
 	t_philo_info	**philo_list;
 	pthread_mutex_t	**fork_list;
-	bool			*is_lock_fork;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -55,10 +54,8 @@ typedef struct s_simulation
 	int				number_of_times_each_philosopher_must_eat;
 	int				number_fill_eat;
 	pthread_mutex_t	*mutex_fill_eat;
-	bool			is_lock_fill_eat;
 	bool			is_end;
 	pthread_mutex_t	*mutex_is_end;
-	bool			is_lock_is_end;
 }	t_simulation;
 
 struct s_philo_info
@@ -122,6 +119,4 @@ bool		check_end_and_print(t_philo_info *philo, t_action action);
 
 // utils/ft_mutex.c
 int			unlock_mutex_all(t_simulation *ctx_simulation);
-int			lock_mutex(pthread_mutex_t **mutex, bool *is_lock);
-int			unlock_mutex(pthread_mutex_t **mutex, bool *is_lock);
 #endif //PHILOSOPHERS_H
