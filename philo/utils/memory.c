@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_util.c                                      :+:      :+:    :+:   */
+/*   memory.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:42:43 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:06:12 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:20:48 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 {
 	int	i;
 
-	printf("free_all_at_last\n");
 	i = 0;
 	usleep(ctx_simulation->time_to_die * 1000);
 	while (i < ctx_simulation->number_of_philosophers)
@@ -38,7 +37,6 @@ void	free_all_at_last(t_simulation *ctx_simulation)
 		i++;
 	}
 	free_ctx_simulation(ctx_simulation);
-	printf("free_all_at_last end\n");
 }
 
 void	free_and_null(void **ptr)

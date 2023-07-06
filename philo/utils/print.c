@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:12:53 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:20:45 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ static char	*get_message(t_action action)
 	return (message);
 }
 
-// ここで死ぬことはない。前の動作の結果、is_endになっていないかチェックしている。
-// 動作後に死ぬならtrueが返る。生きるならメッセージ表示してfalse
 bool	check_end_and_print(\
 	t_philo_info *philo, t_action action)
 {

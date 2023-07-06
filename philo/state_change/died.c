@@ -6,13 +6,12 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 03:14:47 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:20:46 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-// 生死確認 本体
 void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 {
 	long long		tm;
@@ -41,7 +40,6 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 			&ctx_simulation->mutex_is_end, &ctx_simulation->is_lock_is_end);
 }
 
-//チェック関数
 static void	*thread_monitoring(void *arg)
 {
 	t_philo_info	*philo;
@@ -59,7 +57,6 @@ static void	error_exit_monitoring(\
 	free_all_at_last(philo->ctx_simulation);
 }
 
-//死亡監視 init
 void	init_monitoring(t_philo_info *philo)
 {
 	pthread_t	*monitoring;

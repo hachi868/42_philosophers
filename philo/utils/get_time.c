@@ -6,13 +6,12 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 19:55:07 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/04 01:05:51 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/06 16:20:44 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philosophers.h"
 
-// ミリ秒取得
 long long	get_timestamp(void)
 {
 	struct timeval	tv;
@@ -23,13 +22,11 @@ long long	get_timestamp(void)
 	return (m_sec);
 }
 
-// 開始からの時間
 long long	get_timestamp_diff(t_simulation *ctx_simulation)
 {
 	return (get_timestamp() - ctx_simulation->time_start);
 }
 
-// 調整入りusleep
 void	usleep_with_precision(t_simulation *ctx_simulation, long long sec_limit)
 {
 	long long	time_start_usleep;
