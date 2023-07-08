@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:15:28 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:43:59 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/08 22:07:20 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,18 +105,20 @@ int	main(int argc, char **argv)
 	int				*args;
 	t_simulation	*ctx_simulation;
 
-	if (argc == 5 || argc == 6)
+	if (argc != 5 && argc != 6)
 	{
-		args = (int *)malloc(sizeof(int) * argc);
-		if (is_invalid_args(argc, argv, args) == false)
-		{
-			printf("Error: is_invalid_args\n");
-			return (1);
-		}
-		ctx_simulation = init_simulation(argc, args);
-		if (ctx_simulation == NULL)
-			return (1);
-		start_simulation(ctx_simulation);
+		printf("Error: invalid argc\n");
+		return (1);
 	}
+	args = (int *)malloc(sizeof(int) * argc);
+	if (is_invalid_args(argc, argv, args) == false)
+	{
+		printf("Error: is_invalid_args\n");
+		return (1);
+	}
+	ctx_simulation = init_simulation(argc, args);
+	if (ctx_simulation == NULL)
+		return (1);
+	start_simulation(ctx_simulation);
 	return (0);
 }

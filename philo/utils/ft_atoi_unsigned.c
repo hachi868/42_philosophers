@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 23:52:01 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/05 01:12:37 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/08 22:22:57 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,12 @@ int	ft_atoi_unsigned(const char *str_num)
 	while (str_num[i] == ' ' || (str_num[i] >= 9 && str_num[i] <= 13))
 		i++;
 	if (str_num[i] == '-')
-		return (-1);
+	{
+		if (str_num[i + 1] == '0' && str_num[i + 2] == '\0')
+			i++;
+		else
+			return (-1);
+	}
 	else if (str_num[i] == '+')
 		i++;
 	if (!(str_num[i] >= '0' && str_num[i] <= '9') \
@@ -43,7 +48,7 @@ int	ft_atoi_unsigned(const char *str_num)
 		num = num * 10 + (str_num[i] - '0');
 		i++;
 	}
-	if (num > INT_MAX)
+	if (num > INT_MAX || str_num[i] != '\0')
 		return (-1);
 	return ((int)num);
 }
