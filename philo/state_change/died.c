@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:05:42 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:41:28 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 14:02:19 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{
-		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 		return ;
 	}
 	tm = get_timestamp_diff(ctx_simulation);
@@ -34,7 +34,7 @@ void	check_living(t_simulation *ctx_simulation, t_philo_info *philo)
 		unlock_mutex_all(philo->ctx_simulation);
 		return ;
 	}
-	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+	unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 }
 
 static void	*thread_monitoring(void *arg)

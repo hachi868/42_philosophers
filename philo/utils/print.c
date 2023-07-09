@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 02:48:22 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:37:23 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 14:32:58 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	check_end_and_print(\
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	if (ctx_simulation->is_end == true)
 	{
-		pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+		unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 		return (true);
 	}
 	message = get_message(action);
@@ -52,6 +52,6 @@ bool	check_end_and_print(\
 	else
 		timestamp = get_timestamp_diff(ctx_simulation);
 	printf("%lld %d %s\n", timestamp, philo->index, message);
-	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+	unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 	return (false);
 }

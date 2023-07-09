@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:53:49 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:41:15 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 14:26:05 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	lock_unlock_spork(t_philo_info *philo, bool is_lock)
 	if (is_lock == LOCK)
 		pthread_mutex_lock(ctx_simulation->fork_list[i_spork]);
 	else
-		pthread_mutex_unlock(ctx_simulation->fork_list[i_spork]);
+		unlock_mutex(ctx_simulation->fork_list[i_spork], "fork_list[i_spork]");
 }
 
 static void	lock_unlock_fork(t_philo_info *philo, bool is_lock)
@@ -35,7 +35,7 @@ static void	lock_unlock_fork(t_philo_info *philo, bool is_lock)
 	if (is_lock == LOCK)
 		pthread_mutex_lock(ctx_simulation->fork_list[i_fork]);
 	else
-		pthread_mutex_unlock(ctx_simulation->fork_list[i_fork]);
+		unlock_mutex(ctx_simulation->fork_list[i_fork], "fork_list[i_fork]");
 }
 
 static void	unlock_spork_and_fork(t_philo_info *philo)

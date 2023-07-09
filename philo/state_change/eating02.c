@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 03:04:58 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:36:46 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 14:03:28 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	is_fill_eat(t_simulation *ctx_simulation, t_philo_info *philo)
 {
 	pthread_mutex_lock(ctx_simulation->mutex_is_end);
 	philo->ctx_simulation->is_end = true;
-	pthread_mutex_unlock(ctx_simulation->mutex_is_end);
+	unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 	printf("Simulation stops: "
 		"All philosophers have eaten at least %d times.\n", \
 		ctx_simulation->number_of_times_each_philosopher_must_eat);
@@ -57,7 +57,7 @@ bool	check_each_eaten(t_philo_info *philo)
 			is_fill_eat(ctx_simulation, philo);
 			return (true);
 		}
-		pthread_mutex_unlock(ctx_simulation->mutex_fill_eat);
+		unlock_mutex(ctx_simulation->mutex_fill_eat, "fill_eat");
 	}
 	return (false);
 }

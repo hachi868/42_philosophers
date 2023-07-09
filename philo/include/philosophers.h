@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/23 19:14:52 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/06 16:44:03 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 13:58:16 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,4 +119,5 @@ bool		check_end_and_print(t_philo_info *philo, t_action action);
 
 // utils/ft_mutex.c
 int			unlock_mutex_all(t_simulation *ctx_simulation);
+int			unlock_mutex(pthread_mutex_t *cr_mutex, char *name_func);
 #endif //PHILOSOPHERS_H
