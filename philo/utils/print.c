@@ -51,6 +51,8 @@ bool	check_end_and_print(\
 	}
 	else
 		timestamp = get_timestamp_diff(ctx_simulation);
+	if (strcmp(message, "is eating") == 0)
+		printf("%lld %d has taken a fork\n", timestamp, philo->index);
 	printf("%lld %d %s\n", timestamp, philo->index, message);
 	unlock_mutex(ctx_simulation->mutex_is_end, "is_end");
 	return (false);

@@ -6,7 +6,7 @@
 /*   By: hachi-gbg <dev@hachi868.com>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 03:53:49 by hachi-gbg         #+#    #+#             */
-/*   Updated: 2023/07/09 14:26:05 by hachi-gbg        ###   ########.fr       */
+/*   Updated: 2023/07/09 14:40:00 by hachi-gbg        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,6 @@ t_status	do_fork_and_eat(t_philo_info *philo)
 		return (ENDED);
 	}
 	lock_unlock_fork(philo, LOCK);
-	if (do_take_a_fork(philo) == ENDED)
-	{
-		unlock_spork_and_fork(philo);
-		return (ENDED);
-	}
 	if (do_eat(philo) == ENDED)
 	{
 		unlock_spork_and_fork(philo);
